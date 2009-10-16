@@ -49,10 +49,17 @@
 
 (compile-if-newer-and-load "~/.emacs/pkg/haskell-mode-2.4/haskell-site-file")
 
-;(require 'yasnippet-bundle)
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs/pkg/yasnippet-0.6.1c/snippets")
+(defun init-yas ()
+   (require 'yasnippet)
+   (yas/initialize)
+   (yas/load-directory "~/.emacs/pkg/yasnippet-0.6.1c/snippets")
+)
+
+(if (featurep 'emacs)
+  (init-yas)
+  nil
+)
+
 
 ;(compile-if-newer-and-load "~/.emacs/pkg/gtags")
 ;(compile-if-newer-and-load "~/.emacs/pkg/locate")
@@ -92,3 +99,4 @@
     (recentf-mode)
 )
 
+(custom-set-faces)
