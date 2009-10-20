@@ -80,9 +80,9 @@
 	(set-default-font "-outline-Consolas-normal-r-normal-normal-12-*-96-96-c-*-iso10646-1")
 	;(set-default-font "-outline-Bitstream Vera Sans Mono-normal-r-normal-normal-11-*-96-96-c-*-iso10646-1")
       )
-					; else unix
+    ; else unix
     (if (featurep 'xemacs)
-        (set-face-font 'default "-microsoft-consolas-*-*-normal--10-0-96-96-c-0-iso8859-1")
+        (set-face-font 'default "-microsoft-consolas-*-*-normal--11-0-96-96-c-0-iso8859-1")
         ()
       )
     )
@@ -97,3 +97,7 @@
 ; (set-face-font 'default "-microsoft-consolas-*-*-normal--10-0-96-96-c-0-iso8859-1")
 ; (set-face-font 'default "-microsoft-droid sans mono-*-*-normal--10-100-96-96-c-0-iso8859-1")
 ; (set-face-font 'default "-microsoft-monospac821 bt-*-*-normal--9-90-96-96-c-0-iso8859-1")
+
+;(set-face-font 'default "-microsoft-andale mono-*-*-normal--10-100-96-96-c-0-iso8859-1")
+;(set-face-font 'default "-microsoft-dejavu sans mono-*-*-normal--10-0-96-96-c-0-iso8859-1")
+;(set-face-font 'default "-microsoft-dejavu sans mono-*-*-normal--9-0-96-96-c-0-iso8859-1")
