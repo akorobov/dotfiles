@@ -2,9 +2,9 @@
 
 ; set automodes 
 (setq auto-mode-alist '(
-  ("\\.erl$"                    . erlang-mode)
+    ("\\.erl$"                    . erlang-mode)
 	("\\.hs$"                     . haskell-mode)
-  ("\\.c$"                      . c++-mode)
+    ("\\.c$"                      . c++-mode)
 	("\\.h$"                      . c++-mode)
 	("\\.C$"                      . c++-mode)
 	("\\.H$"                      . c++-mode)
@@ -46,89 +46,88 @@
 
 ;; ; programming modes
 
-;; (defconst my-c-style
-;;   '((c-tab-always-indent        . t)
-;;     (c-basic-offset . 2)
-;;     (c-comment-only-line-offset . 0)
-;;     (c-hanging-braces-alist     . ((substatement-open after)
-;;                                    (brace-list-open)))
-;;     (c-hanging-colons-alist     . ((member-init-intro before)
-;;                                    (inher-intro)
-;;                                    (case-label after)
-;;                                    (label after)
-;;                                    (access-label after)))
-;;     (c-cleanup-list             . (scope-operator
-;;                                    empty-defun-braces
-;;                                    defun-close-semi))
-;;     (c-offsets-alist            . ((arglist-close . c-lineup-arglist)
-;; 				   (statement-block-intro . 2)
-;; 				   (substatement-open . 0)
-;; 				   (defun-block-intro . 2)
-;;                                    (case-label        . 2)
-;;                                    (block-open        . 0)
-;; 				   (inline-open       . 0)
-;;                                    (knr-argdecl-intro . -)))
-;;     (c-echo-syntactic-information-p . t)
-;;     )
-;;   "my c programming style")
+(defconst my-c-style
+  '((c-tab-always-indent        . t)
+    (c-basic-offset . 4)
+    (c-comment-only-line-offset . 0)
+    (c-hanging-braces-alist     . ((substatement-open after)
+                                    (brace-list-open)))
+    (c-hanging-colons-alist     . ((member-init-intro before)
+                                   (inher-intro)
+                                   (case-label after)
+                                   (label after)
+                                   (access-label after)))
+    (c-cleanup-list             . (scope-operator
+                                   empty-defun-braces
+                                   defun-close-semi))
+    (c-offsets-alist            . ((arglist-close . c-lineup-arglist)
+                                   (statement-block-intro . 4)
+                                   (substatement-open . 0)
+                                   (defun-block-intro . 4)
+                                   (case-label        . 4)
+                                   (block-open        . 0)
+                                   (inline-open       . 0)
+                                   (knr-argdecl-intro . -)))
+    (c-echo-syntactic-information-p . t)
+    )
+  "my c programming style")
 
-;; (defconst my-java-style
-;;   '(
-;;     (c-tab-always-indent        . t)
-;;     (c-basic-offset . 2)
-;;     (c-echo-syntactic-information-p . t)
-;;     (c-offsets-alist             . ((inline-open . 0)
-;; 				    (topmost-intro-cont    . +)
-;; 				    (statement-block-intro . +)
-;; 				    (knr-argdecl-intro     . 5)
-;; 				    (substatement-open     . 0)
-;; 				    (label                 . +)
-;; 				    (statement-case-open   . +)
-;; 				    (statement-cont        . +)
-;; 				    (arglist-intro  . c-lineup-arglist-intro-after-paren)
-;; 				    (arglist-close  . c-lineup-arglist)
-;; 				    (access-label   . 0)
-;; 				    (inher-cont     . c-lineup-java-inher)
-;; 				    (func-decl-cont . c-lineup-java-throws)
-;; 				    ))
-;;     )
-;;   "my java programming style")
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defconst my-java-style
+  '(
+    (c-tab-always-indent        . t)
+    (c-basic-offset . 4)
+    (c-echo-syntactic-information-p . t)
+    (c-offsets-alist             . ((inline-open . 0)
+                                    (topmost-intro-cont    . +)
+                                    (statement-block-intro . +)
+                                    (knr-argdecl-intro     . 5)
+                                    (substatement-open     . 0)
+                                    (label                 . +)
+                                    (statement-case-open   . +)
+                                    (statement-cont        . +)
+                                    (arglist-intro  . c-lineup-arglist-intro-after-paren)
+                                    (arglist-close  . c-lineup-arglist)
+                                    (access-label   . 0)
+                                    (inher-cont     . c-lineup-java-inher)
+                                    (func-decl-cont . c-lineup-java-throws)
+                                    ))
+    )
+  "my java programming style"
+)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (add-hook 'c-mode-common-hook 'ak-c-hook)
-;; (add-hook 'c++-mode-common-hook 'ak-c-hook)
-;; (add-hook 'java-mode-hook 'ak-java-hook)
+(add-hook 'c-mode-common-hook 'ak-c-hook)
+(add-hook 'c++-mode-common-hook 'ak-c-hook)
+(add-hook 'java-mode-hook 'ak-java-hook)
 
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (defun ak-c-hook ()
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun ak-c-hook ()
+  ;; ctypes is mighty (add support for font-locking user defined types)
+  (require 'ctypes)
+  (setq ctypes-write-types-at-exit t)
+  (ctypes-read-file "~/emacs/ctypes.c++" nil t t)
+  (setq ctypes-auto-parse-mode 1)
 
-;;   ;; ctypes is mighty (add support for font-locking user defined types)
-;;   (require 'ctypes)
-;;   (setq ctypes-write-types-at-exit t)
-;;   (ctypes-read-file "~/emacs/ctypes.c++" nil t t)
-;;   (setq ctypes-auto-parse-mode 1)
 
-
-;;   ;; still do ~1~ style backups, even if we are
-;;   ;; looking at a cvs file.
-;;   (setq backup-inhibited nil)  
+  ;; still do ~1~ style backups, even if we are
+  ;; looking at a cvs file.
+  (setq backup-inhibited nil)  
   
-;;   ;; evil cc-mode defines its own keymap. 
-;;   (define-key c-mode-base-map "\M-q"  'kill-buffer)
-;;   (define-key c-mode-base-map "\M-j"  'goto-line)
+  ;; evil cc-mode defines its own keymap. 
+  (define-key c-mode-base-map "\M-q"  'kill-buffer)
+  (define-key c-mode-base-map "\M-j"  'goto-line)
 
-;;   (c-add-style "my-c-style" my-c-style t)
-;;   (c-add-style "my-java-style" my-java-style t)
-;;   (c-set-style "my-c-style")
+  (c-add-style "my-c-style" my-c-style t)
+  (c-add-style "my-java-style" my-java-style t)
+  (c-set-style "my-c-style")
+)
 
-;; )
-
-;; (defun ak-java-hook ()
-
-;;   (c-set-style "my-java-style")
-;;   (define-key c-mode-base-map "\M-q"  'kill-buffer)
-;; )
-;; 					; end of defun ak-cc-mode-common-hook
+(defun ak-java-hook ()
+  
+  (c-set-style "my-java-style")
+  (define-key c-mode-base-map "\M-q"  'kill-buffer)
+)
+					; end of defun ak-cc-mode-common-hook
 
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -142,19 +141,20 @@
 ;; ; 					;  (switch-to-buffer-other-window)
 ;; ; )
 
-;; (require 'ffap)				; load the package
-;; (ffap-bindings)				; do default key bindings
-;; ;; triple click on a file to open it...
-;; (add-hook 'mouse-track-click-hook 'ffap-mouse-track-click)
+
+(require 'ffap)				; load the package
+(ffap-bindings)				; do default key bindings
+;; triple click on a file to open it...
+(add-hook 'mouse-track-click-hook 'ffap-mouse-track-click)
 
 
-;; (require 'cperl-mode)  
-;; ; fix broken cperl indentation
-;; (setq-default cperl-extra-newline-before-brace t)
-;; (setq-default cperl-indent-level 2)
-;; (setq-default cperl-continued-statement-offset cperl-indent-level)
-;; (setq-default cperl-continued-brace-offset (- cperl-indent-level))
-;; (setq-default cperl-label-offset (- cperl-indent-level))
-;; (setq-default cperl-electric-parens-string "")
+(require 'cperl-mode)  
+; fix broken cperl indentation
+(setq-default cperl-extra-newline-before-brace t)
+(setq-default cperl-indent-level 2)
+(setq-default cperl-continued-statement-offset cperl-indent-level)
+(setq-default cperl-continued-brace-offset (- cperl-indent-level))
+(setq-default cperl-label-offset (- cperl-indent-level))
+(setq-default cperl-electric-parens-string "")
 
 
