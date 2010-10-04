@@ -49,7 +49,3 @@
 ; nice colors
 ; (color-theme-charcoal-black-flat)
 (color-theme-tangotango)
-
-; customize things a bit
-;(custom-set-faces)
-
