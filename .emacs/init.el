@@ -24,6 +24,7 @@
 ; color themes
 (compile-if-newer-and-load "~/.emacs/pkg/color-theme")
 (compile-if-newer-and-load "~/.emacs/pkg/color-theme-tangotango")
+(compile-if-newer-and-load "~/.emacs/pkg/color-theme-zenburn")
 (compile-if-newer-and-load "~/.emacs/themes")
 
 
