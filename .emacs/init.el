@@ -44,8 +44,8 @@
 
 ; misc development modes(right now start manually)
 ; haskell
-;(add-to-list 'load-path "~/.emacs/pkg/haskell-mode-2.8.0")
-;(compile-if-newer-and-load "~/.emacs/pkg/haskell-mode-2.8.0/haskell-site-file")
+;(add-to-list 'load-path "~/.emacs/pkg/haskell-mode")
+;(compile-if-newer-and-load "~/.emacs/pkg/haskell-mode/haskell-site-file")
 
 ; scala 
 ;(add-to-list 'load-path "~/.emacs/pkg/scala")
