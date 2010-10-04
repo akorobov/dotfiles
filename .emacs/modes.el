@@ -151,7 +151,7 @@
 ;; (require 'cperl-mode)  
 ;; ; fix broken cperl indentation
 ;; (setq-default cperl-extra-newline-before-brace t)
-;; (setq-default cperl-indent-level 2)
+;; (setq-default cperl-indent-level 4)
 ;; (setq-default cperl-continued-statement-offset cperl-indent-level)
 ;; (setq-default cperl-continued-brace-offset (- cperl-indent-level))
 ;; (setq-default cperl-label-offset (- cperl-indent-level))

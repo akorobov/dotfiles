@@ -1,12 +1,12 @@
 ; erlang configuration(move to different file)
 (if (eq system-type 'windows-nt)
     (progn 
-      (setq exec-path (cons "c:/Applications/erlang/bin" exec-path))
-      (setq erlang-root-dir "C:/Applications/erlang")  )
+      (setq exec-path (cons "d:/applications/erlang/bin" exec-path))
+      (setq erlang-root-dir "d:/applications/erlang")  )
     nil
 )
 
-
+; matching ~/.erlang.cookie
 (setq derl-cookie "cookie-monster-was-here")
 (require 'erlang-start)
 (require 'distel)
@@ -19,12 +19,12 @@
 (defun distel-load-shell ()
     "Load/reload the erlang shell connection to a distel node"
     (interactive)
-    (setq erl-nodename-cache 'emacs@akorobov-xp)
+    (setq erl-nodename-cache 'emacs@akorobov-w7)
     (setq distel-modeline-node "emacs")
     (force-mode-line-update)
     (let ((file-buffer (current-buffer))
           (file-window (selected-window)))
-      (setq inferior-erlang-machine-options '("-sname" "emacs@akorobov-xp"))
+      (setq inferior-erlang-machine-options '("-sname" "emacs@akorobov-w7"))
       (switch-to-buffer-other-window file-buffer)
       (inferior-erlang)
       (select-window file-window)

@@ -1,5 +1,3 @@
-;-*- Mode: Emacs-Lisp -*-   ;Comment that puts emacs into lisp mode
-
 ; Convert from DOS > UNIX
 (defun dos-unix ()
   (interactive)
@@ -45,3 +43,10 @@
   ;; Since we killed it, don't let caller do that.
   nil)
 
+(defun read-lines (file)
+  "returns a list of lines read from a file with given name."
+  (with-temp-buffer
+    (insert-file-contents file)
+    (split-string
+     (buffer-string) "\n" t)
+    ) )
