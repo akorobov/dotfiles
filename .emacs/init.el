@@ -43,18 +43,24 @@
   (add-hook 'server-done-hook 'delete-frame)
 )
 
-; misc development modes(right now start manually)
-; haskell
-;(add-to-list 'load-path "~/.emacs/pkg/haskell-mode")
-;(compile-if-newer-and-load "~/.emacs/pkg/haskell-mode/haskell-site-file")
+; load language-specific libs when needed, faster time, less overhead
+(defun load-scala ()
+    (interactive)
+    (add-to-list 'load-path "~/.emacs/pkg/scala")
+    (require 'scala-mode-auto)
+    (add-to-list 'load-path "~/.emacs/pkg/ensime/elisp")
+    (require 'ensime)
+ )
 
-; scala 
-;(add-to-list 'load-path "~/.emacs/pkg/scala")
-;(add-to-list 'load-path "~/.emacs/pkg/ensime/elisp")
-;(require 'scala-mode-auto)
-;(require 'ensime)
+(defun load-haskell ()
+    (interactive)
+    (add-to-list 'load-path "~/.emacs/pkg/haskell-mode")
+    (compile-if-newer-and-load "~/.emacs/pkg/haskell-mode/haskell-site-file")
+ )
 
-; erlang
-;(add-to-list 'load-path "~/.emacs/pkg/erlang")
-;(add-to-list 'load-path "~/.emacs/pkg/distel")
-;(require 'distel)
+(defun load-erlang ()
+    (interactive)
+    (add-to-list 'load-path "~/.emacs/pkg/erlang")
+    (add-to-list 'load-path "~/.emacs/pkg/distel")
+    (require 'distel)
+)

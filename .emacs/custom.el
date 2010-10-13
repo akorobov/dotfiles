@@ -42,9 +42,13 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-; Default emacs's C mode indentation is annoying
+; fix default c- and cperl- mode indentations
 (setq c-default-style "linux"
       c-basic-offset 4)
+(setq cperl-continued-statement-offset 0
+      cperl-indent-level 4
+      cperl-indent-parens-as-block t
+      cperl-close-paren-offset -4 )
 
 ; nice colors
 ; (color-theme-charcoal-black-flat)

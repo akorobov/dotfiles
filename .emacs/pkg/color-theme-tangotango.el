@@ -189,6 +189,16 @@
      (magit-header ((t (:foreground "#edd400"))))
      (magit-diff-add ((t (:foreground "#729fcf"))))
      (magit-item-highlight ((t (:weight extra-bold :inverse-video t))))
+
+     (diff-header ((t (:inherit magit-header))))
+     (diff-index ((t (:inherit bold))))
+     (diff-file-header ((t (:inherit bold))))
+     (diff-hunk-header ((t (:inherit bold))))
+
+     (diff-added ((t (:inherit magit-diff-add))))
+     (diff-removed ((t (:inherit "#8cd0d3"))))
+     (diff-context ((t (:inherit font-lock-comment-face))))
+
 )))
 
 (provide 'color-theme-tangotango)

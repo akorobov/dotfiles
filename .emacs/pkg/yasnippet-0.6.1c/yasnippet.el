@@ -765,9 +765,11 @@ Do this unless `yas/dont-activate' is t or the function
   (interactive)
   (yas/minor-mode -1))
 
-(define-globalized-minor-mode yas/global-mode yas/minor-mode yas/minor-mode-on
-  :group 'yasnippet
-  :require 'yasnippet)
+(when (fboundp 'define-globalized-minor-mode)
+  (define-globalized-minor-mode yas/global-mode yas/minor-mode yas/minor-mode-on
+    :group 'yasnippet
+    :require 'yasnippet)
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Major mode stuff
