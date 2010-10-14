@@ -50,6 +50,9 @@
       cperl-indent-parens-as-block t
       cperl-close-paren-offset -4 )
 
+
+(setq diff-default-read-only t)
+
 ; nice colors
 ; (color-theme-charcoal-black-flat)
 (color-theme-tangotango)
