@@ -14,8 +14,7 @@
   (load file)
 )
 
-(compile-if-newer-and-load "~/.emacs/keys")
-(compile-if-newer-and-load "~/.emacs/modes")
+;(compile-if-newer-and-load "~/.emacs/keys")
 (compile-if-newer-and-load "~/.emacs/misc")
 
 (compile-if-newer-and-load "~/.emacs/pkg/protbuf")
@@ -25,7 +24,6 @@
 (compile-if-newer-and-load "~/.emacs/pkg/color-theme")
 (compile-if-newer-and-load "~/.emacs/pkg/color-theme-tangotango")
 (compile-if-newer-and-load "~/.emacs/pkg/color-theme-zenburn")
-(compile-if-newer-and-load "~/.emacs/themes")
 
 
 ; customize emacs a bit
@@ -43,7 +41,7 @@
   (add-hook 'server-done-hook 'delete-frame)
 )
 
-; load language-specific libs when needed, faster time, less overhead
+; load language-specific packages when needed
 (defun load-scala ()
     (interactive)
     (add-to-list 'load-path "~/.emacs/pkg/scala")
@@ -60,7 +58,7 @@
 
 (defun load-erlang ()
     (interactive)
-    (add-to-list 'load-path "~/.emacs/pkg/erlang")
-    (add-to-list 'load-path "~/.emacs/pkg/distel")
-    (require 'distel)
+    (compile-if-newer-and-load "my-erlang")
+    (erlang-shell)
 )
+
