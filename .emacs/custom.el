@@ -123,3 +123,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; nice colors
 (color-theme-tangotango)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+; for some reason emacs 23.x hangs randomly for several seconds on windows xp/7
+; this fixes the issue
+(setq w32-get-true-file-attributes nil)
