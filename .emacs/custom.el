@@ -39,6 +39,7 @@
       cperl-indent-level 4
       cperl-indent-parens-as-block t
       cperl-close-paren-offset -4 )
+(setq nxml-child-indent 4)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; configure keyboard settings
 (global-set-key [help] 'info)
