@@ -196,7 +196,7 @@
      (diff-hunk-header ((t (:inherit bold))))
 
      (diff-added ((t (:inherit magit-diff-add))))
-     (diff-removed ((t (:inherit "#8cd0d3"))))
+     (diff-removed ((t (:foreground "#ff0087"))))
      (diff-context ((t (:inherit font-lock-comment-face))))
 
 )))
