@@ -53,8 +53,8 @@
 (global-set-key [(meta j)] 'goto-line)
 (global-set-key [(meta g)] 'grep)
 (global-set-key [(meta q)] 'kill-buffer)
-
 (global-set-key [(meta \`)] 'buffer-menu)
+(global-set-key [(meta backspace)] 'backward-kill-word)
 
 (global-set-key [(control c) (control a)] 'beginning-of-buffer)
 (global-set-key [(control c) (control e)] 'end-of-buffer)
