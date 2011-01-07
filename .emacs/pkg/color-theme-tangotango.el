@@ -188,7 +188,7 @@
      (ecb-tag-header-face ((t (:background "#f57900"))))
      (magit-header ((t (:foreground "#edd400"))))
      (magit-diff-add ((t (:foreground "#729fcf"))))
-     (magit-item-highlight ((t (:weight extra-bold :inverse-video t))))
+     (magit-item-highlight ((t (:weight extra-bold))))
 
      (diff-header ((t (:inherit magit-header))))
      (diff-index ((t (:inherit bold))))
@@ -198,6 +198,18 @@
      (diff-added ((t (:inherit magit-diff-add))))
      (diff-removed ((t (:foreground "#ff0087"))))
      (diff-context ((t (:inherit font-lock-comment-face))))
+     (diff-refine-change ((t (:foreground "orange" :background "#2e3434"))))
+
+     ;; (diff-added-face ((t (nil))))
+     ;; (diff-changed-face ((t (nil))))
+     ;; (diff-context-face ((t (:foreground "grey70"))))
+     ;; (diff-file-header-face ((t (:bold t))))
+     ;; (diff-function-face ((t (:foreground "grey70"))))
+     ;; (diff-header-face ((t (:foreground "light salmon"))))
+     ;; (diff-hunk-header-face ((t (:foreground "light salmon"))))
+     ;; (diff-index-face ((t (:bold t))))
+     ;; (diff-nonexistent-face ((t (:bold t))))
+     ;; (diff-removed-face ((t (nil))))
 
 )))
 

@@ -60,6 +60,15 @@
 (global-set-key [(control c) (control e)] 'end-of-buffer)
 (global-set-key [(control c) (a)] 'beginning-of-buffer)
 (global-set-key [(control c) (e)] 'end-of-buffer)
+(global-set-key [(control c) (control q)] 'diff-apply-hunk)
+
+(global-set-key (kbd "<select>") 'end-of-line)
+
+(global-set-key [(meta i)] 'imenu)
+(global-set-key [(meta \])] 'gtags-find-tag)
+(global-set-key [(control x) (g) (s)] 'gtags-find-symbol)
+(global-set-key [(control x) (g) (r)] 'gtags-find-rtag)
+(global-set-key [(control x) (g) (t)] 'gtags-find-tag)
 
 ; use pc-selection mode unless running in terminal
 (if window-system
