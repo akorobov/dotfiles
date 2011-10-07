@@ -6,6 +6,7 @@
 (add-to-list 'load-path "~/.emacs/pkg")
 (add-to-list 'load-path "~/.emacs/pkg/org")
 (add-to-list 'load-path "~/.emacs/pkg/yasnippet-0.6.1c")
+(add-to-list 'load-path "~/.emacs/pkg/magit")
 
 
 ; load libraries

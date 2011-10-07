@@ -1,0 +1,7 @@
+# Ignore everything
+/*
+# except following
+!.gitignore
+!.emacs
+!.emacs/**
+!.emacs.el

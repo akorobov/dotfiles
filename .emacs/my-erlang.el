@@ -15,9 +15,9 @@
       (setq erlang-root-dir "d:/applications/erlang-r14b")  )
       (setq erlang-man-root-dir "d:/applications/erlang-r14b/man")
     (progn
-      (setq erlang-root-dir "/tmp/akorobov/erlang")
-      (add-to-list 'exec-path "/tmp/akorobov/erlang/bin")
-      (setq erlang-man-root-dir "/tmp/akorobov/erlang/man")
+      (setq erlang-root-dir "/opt/erlang")
+      (add-to-list 'exec-path "/opt/erlang/bin")
+      (setq erlang-man-root-dir "/opt/erlang/man")
       )
 )
 

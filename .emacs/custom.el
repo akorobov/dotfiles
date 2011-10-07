@@ -128,3 +128,13 @@
 ; for some reason emacs 23.x hangs randomly for several seconds on windows xp/7
 ; this fixes the issue
 (setq w32-get-true-file-attributes nil)
+
+; always split horizontally
+;(setq split-width-threshold 0)
+;(setq split-height-threshold nil)
+(setq display-buffer-reuse-frames t)
+
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
