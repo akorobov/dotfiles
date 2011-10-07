@@ -42,6 +42,11 @@
 (setq nxml-child-indent 4)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; configure keyboard settings
+; 'C-h l' to see last key strokes 
+(define-key function-key-map "\e[25~" [(shift f3)])
+(define-key function-key-map "\e[26~" [(shift f4)])
+(define-key function-key-map "\e[28~" [(shift f5)])
+
 (global-set-key [help] 'info)
 (global-set-key [f1] 'manual-entry)
 (global-set-key [f2] 'save-buffer)
@@ -66,6 +71,8 @@
 
 (global-set-key [(meta i)] 'imenu)
 (global-set-key [(meta \])] 'gtags-find-tag)
+
+(define-key global-map [(control x) (g)] nil) ; define prefix
 (global-set-key [(control x) (g) (s)] 'gtags-find-symbol)
 (global-set-key [(control x) (g) (r)] 'gtags-find-rtag)
 (global-set-key [(control x) (g) (t)] 'gtags-find-tag)
