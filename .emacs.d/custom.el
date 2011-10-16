@@ -61,8 +61,13 @@
 (global-set-key [f2] 'save-buffer)
 (global-set-key [f3] 'find-file-at-point)
 (global-set-key [(shift f3)] 'revert-buffer)
-(global-set-key [f5] 'other-window)
+
 (global-set-key [(control o)] 'other-window)
+(global-set-key (kbd "M-o") 'other-window)
+(global-set-key (kbd "M-3") 'split-window-horizontally)
+(global-set-key (kbd "M-2") 'split-window-vertically)
+(global-set-key (kbd "M-1") 'delete-other-windows)
+(global-set-key (kbd "M-0") 'delete-window)
 
 (global-set-key [(meta j)] 'goto-line)
 (global-set-key [(meta g)] 'grep)
@@ -114,6 +119,13 @@
    (yas/load-directory "~/.emacs.d/pkg/yasnippet-0.6.1c/snippets")
 )
 (init-yas)
+
+
+;; auto-complete 
+(add-to-list 'load-path "~/.emacs.d/pkg/auto-complete")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/pkg/auto-complete/ac-dict")
+(ac-config-default)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; use recentf
 (recentf-mode)
