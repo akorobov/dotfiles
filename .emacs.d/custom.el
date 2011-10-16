@@ -111,7 +111,7 @@
 (defun init-yas ()
    (require 'yasnippet)
    (yas/initialize)
-   (yas/load-directory "~/.emacs/pkg/yasnippet-0.6.1c/snippets")
+   (yas/load-directory "~/.emacs.d/pkg/yasnippet-0.6.1c/snippets")
 )
 (init-yas)
 
