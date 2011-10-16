@@ -2,6 +2,8 @@
 /*
 # except following
 !.gitignore
+!.emacs.d
+!.emacs.d/**
 !.emacs
 !.emacs/**
 !.emacs.el
