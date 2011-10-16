@@ -4,6 +4,9 @@
 ; no splash
 (setq inhibit-startup-message t)
 
+; faster switching between buffers
+(iswitchb-mode 1)
+
 (if window-system
     ();(menu-bar-mode -1)
     (menu-bar-mode -1))
@@ -41,6 +44,12 @@
       cperl-close-paren-offset -4 )
 (setq nxml-child-indent 4)
 
+; don't get lost
+(show-paren-mode t)
+
+;; delete trailing spaces on save
+; (add-hook 'before-save-hook (lambda () (delete-trailing-whitespace)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; configure keyboard settings
 ; 'C-h l' to see last key strokes 
 (define-key function-key-map "\e[25~" [(shift f3)])
@@ -76,15 +85,6 @@
 (global-set-key [(control x) (g) (s)] 'gtags-find-symbol)
 (global-set-key [(control x) (g) (r)] 'gtags-find-rtag)
 (global-set-key [(control x) (g) (t)] 'gtags-find-tag)
-
-; use pc-selection mode unless running in terminal
-(if window-system
-    (progn
-      (require 'pc-select)
-      (pc-selection-mode)
-      (delete-selection-mode t)
-      )
-  ())
 
 (defun shell-filter-region ( command )
   (interactive (list (read-shell-command "Filter to apply: ")))

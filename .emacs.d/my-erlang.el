@@ -4,8 +4,8 @@
 ; code:add_pathz("~/.emacs/pkg/distel/ebin").
 ; code:add_pathz("./ebin").
 
-(add-to-list 'load-path "~/.emacs/pkg/erlang")
-(add-to-list 'load-path "~/.emacs/pkg/distel/elisp")
+(add-to-list 'load-path "~/.emacs.d/pkg/erlang")
+(add-to-list 'load-path "~/.emacs.d/pkg/distel/elisp")
 
 (require 'erlang-start)
 
