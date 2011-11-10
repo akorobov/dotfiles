@@ -40,14 +40,38 @@
 (defconst distel-shell-keys
   '(("\C-\M-i"   erl-complete)
     ("\M-?"      erl-complete)
+    ("\C-TAB"    auto-complete)
     ("\M-."      erl-find-source-under-point)
     ("\M-,"      erl-find-source-unwind)
     ("\M-*"      erl-find-source-unwind)
     )
   "Additional keys to bind when in Erlang shell.")
 
+(defconst my-distel-keys
+  '(
+    ("\C-TAB"    auto-complete)
+    ("\M-TAB"    auto-complete))
+  "Additional key bindings for erlang-mode")
+
+
+
 (add-hook 'erlang-shell-mode-hook
           (lambda ()
             (dolist (spec distel-shell-keys)
               (define-key erlang-shell-mode-map (car spec) (cadr spec))))
 )
+
+;; (add-hook 'erlang-mode-hook
+;;           (lambda ()
+;;             (dolist (spec my-distel-keys)
+;;               (define-key erlang-extended-mode-map (car spec) (cadr spec))))
+;; )
+
+; auto-complete mode in erlang
+(add-to-list 'ac-modes 'erlang-mode)
+
+(require  'auto-complete-distel)
+(add-hook 'erlang-mode-hook '(lambda () (setq ac-sources '(ac-source-distel ac-source-yasnippet ac-source-words-in-same-mode-buffers))))
+
+(define-key erlang-extended-mode-map (kbd "<C-tab>")  'auto-complete)
+
