@@ -47,6 +47,9 @@
 ; don't get lost
 (show-paren-mode t)
 
+; delete selected region on edit
+(delete-selection-mode t)
+
 ;; delete trailing spaces on save
 ; (add-hook 'before-save-hook (lambda () (delete-trailing-whitespace)))
 
