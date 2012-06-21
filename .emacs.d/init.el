@@ -5,7 +5,7 @@
 (add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/pkg")
 (add-to-list 'load-path "~/.emacs.d/pkg/org")
-(add-to-list 'load-path "~/.emacs.d/pkg/yasnippet-0.6.1c")
+(add-to-list 'load-path "~/.emacs.d/pkg/yasnippet")
 (add-to-list 'load-path "~/.emacs.d/pkg/magit")
 
 (load "pkg/protbuf")
