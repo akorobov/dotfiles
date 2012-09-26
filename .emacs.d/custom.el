@@ -7,6 +7,8 @@
 ; faster switching between buffers
 (iswitchb-mode 1)
 
+(setq ibuffer-expert t) 
+
 (if window-system
     ();(menu-bar-mode -1)
     (menu-bar-mode -1))
@@ -75,7 +77,7 @@
 (global-set-key [(meta j)] 'goto-line)
 (global-set-key [(meta g)] 'grep)
 (global-set-key [(meta q)] 'kill-buffer)
-(global-set-key [(meta \`)] 'buffer-menu)
+(global-set-key [(meta \`)] 'ibuffer) ; buffer-menu
 (global-set-key [(meta backspace)] 'backward-kill-word)
 
 (global-set-key [(control c) (control a)] 'beginning-of-buffer)
@@ -137,6 +139,11 @@
 (setq diff-default-read-only t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; nice colors
+; color themes
+; (load "pkg/color-theme")
+(load "pkg/color-theme-tangotango")
+(load "pkg/color-theme-zenburn")
+
 (color-theme-tangotango)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
@@ -153,3 +160,7 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
+
+; flymake hangs emacs on osx
+(setq flymake-gui-warnings-enabled nil)
+

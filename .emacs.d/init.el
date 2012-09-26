@@ -11,12 +11,6 @@
 (load "pkg/protbuf")
 (load "pkg/gtags")
 
-; color themes
-(load "pkg/color-theme")
-(load "pkg/color-theme-tangotango")
-(load "pkg/color-theme-zenburn")
-
-
 ; customize emacs a bit
 (load "misc")
 (load "custom")
@@ -30,29 +24,32 @@
                 (bury-buffer)
                 (switch-to-buffer-other-frame server-buf))))
   
-  (add-hook 'server-done-hook 'delete-frame)
-)
+  (add-hook 'server-done-hook 'delete-frame))
 
 ; load language-specific packages when needed
 (defun load-scala ()
     (interactive)
     (add-to-list 'load-path "~/.emacs.d/pkg/scala")
     (require 'scala-mode-auto)
-    (add-to-list 'load-path "~/.emacs.d/pkg/ensime/elisp")
-    (require 'ensime)
- )
+    
+    (add-hook 'scala-mode-hook
+              '(lambda ()
+                 (scala-mode-feature-electric-mode)
+               ))
+    
+    (add-to-list 'load-path "~/.emacs.d/pkg/ensime_2.9.2-0.9.8.1/elisp")
+    (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+    (require 'ensime))
 
 (defun load-haskell ()
     (interactive)
     (add-to-list 'load-path "~/.emacs.d/pkg/haskell-mode")
-    (load "haskell-site-file")
- )
+    (load "haskell-site-file"))
 
 (defun load-erlang ()
     (interactive)
     (load "my-erlang")
-    (erlang-shell)
-)
+    (erlang-shell))
 
 ; elpa/package archives
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
