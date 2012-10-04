@@ -16,15 +16,16 @@
 (load "custom")
 
 ; start server
-(progn
-  (server-start)
-  (add-hook 'server-switch-hook
-            (lambda nil
-              (let ((server-buf (current-buffer)))
-                (bury-buffer)
-                (switch-to-buffer-other-frame server-buf))))
-  
-  (add-hook 'server-done-hook 'delete-frame))
+(if (and (fboundp 'server-running-p) 
+         (not (server-running-p)))
+    (progn
+      (server-start)
+      (add-hook 'server-switch-hook
+                (lambda nil
+                  (let ((server-buf (current-buffer)))
+                    (bury-buffer)
+                    (switch-to-buffer-other-frame server-buf))))))
+
 
 ; load language-specific packages when needed
 (defun load-scala ()
