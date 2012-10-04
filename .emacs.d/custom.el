@@ -162,5 +162,6 @@
       `((".*" ,temporary-file-directory t)))
 
 ; flymake hangs emacs on osx
+(require 'flymake)
 (setq flymake-gui-warnings-enabled nil)
 
