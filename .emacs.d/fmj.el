@@ -13,7 +13,7 @@
 (require 'flymake)
 
 (defvar fmj/ecj-path
-  "/Users/ak/dev/tools/ecj-4.2.jar"
+  (expand-file-name  "~/dev/tools/ecj-4.2.jar")
   "location of ecj batch compiler jar")
 
 (defvar fmj/source-version "1.6")
@@ -48,13 +48,16 @@
                          (add-to-list 'classpath path))))) classpath-entries)
 
         `((sourcepath . ,sourcepath) (classpath . ,classpath)))
-    '((sourcepath . ()) (claspath . ()))))
+    '((sourcepath . (".")) (claspath . (".")))))
  
 (defun fmj/get-abs-path (p e) (expand-file-name (concat p "/" e)))
 (defun fmj/add-to-path  (s e) (concat s ":" e))
 
 (defun fmj/project-root () 
-  (file-name-directory (fmj/find-classpath-file)))
+  (let ((cpfile (fmj/find-classpath-file)))
+    (if cpfile
+        (file-name-directory (fmj/find-classpath-file))
+        nil)))
 
 (defun fmj/get-abs-sourcepath (root sc)
   (let* ((sps (cdr (assoc 'sourcepath sc)))
