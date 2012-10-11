@@ -44,7 +44,10 @@
 (defun load-haskell ()
     (interactive)
     (add-to-list 'load-path "~/.emacs.d/pkg/haskell-mode")
-    (load "haskell-site-file"))
+    (load "haskell-site-file")
+    
+    (custom-set-variables
+     '(haskell-mode-hook '(turn-on-haskell-indentation))))
 
 (defun load-erlang ()
     (interactive)

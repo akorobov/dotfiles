@@ -164,4 +164,17 @@
 ; flymake hangs emacs on osx
 (require 'flymake)
 (setq flymake-gui-warnings-enabled nil)
+; color flymake
+(if window-system    
+    (custom-set-faces
+     '(flymake-errline ((((class color)) (:underline t :background "red"))))
+     '(flymake-warnline ((((class color)) (:underline t :background "darkslategray4")))))
+    (custom-set-faces
+     '(flymake-errline ((((class color)) (:underline t :background "OrangeRed"))))
+     '(flymake-warnline ((((class color)) (:background "color-96" ))))))
 
+; 
+(defun enable-clang-ac ()
+  (interactive)
+  (require 'auto-complete-clang)
+  (setq ac-sources (append '(ac-source-clang) ac-sources)))
