@@ -163,7 +163,9 @@
 
 ; flymake hangs emacs on osx
 (require 'flymake)
+(require 'flymake-cursor)
 (setq flymake-gui-warnings-enabled nil)
+
 ; color flymake
 (if window-system    
     (custom-set-faces
@@ -171,10 +173,20 @@
      '(flymake-warnline ((((class color)) (:underline t :background "darkslategray4")))))
     (custom-set-faces
      '(flymake-errline ((((class color)) (:underline t :background "OrangeRed"))))
-     '(flymake-warnline ((((class color)) (:background "color-96" ))))))
+     '(flymake-warnline ((((class color)) (:background "color-24" ))))))
 
 ; 
 (defun enable-clang-ac ()
   (interactive)
   (require 'auto-complete-clang)
   (setq ac-sources (append '(ac-source-clang) ac-sources)))
+
+; include dired buffers when filtering by path
+(eval-after-load "ibuf-ext"
+  '(define-ibuffer-filter path
+       "Toggle current view to buffers with file or directory name matching QUALIFIER."
+     (:description "path"
+          :reader (read-from-minibuffer "Filter by file/directory name (regexp): "))
+     (ibuffer-awhen (or (buffer-local-value 'buffer-file-name buf)
+                        (buffer-local-value 'dired-directory buf))
+       (string-match qualifier it))))
