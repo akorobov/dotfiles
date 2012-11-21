@@ -4,7 +4,7 @@
 
 
 ;;;### (autoloads (clojure-enable-slime-on-existing-buffers clojure-jack-in
-;;;;;;  clojure-mode) "clojure-mode" "clojure-mode.el" (20123 27899))
+;;;;;;  clojure-mode) "clojure-mode" "clojure-mode.el" (20600 24611))
 ;;; Generated autoloads from clojure-mode.el
 
 (autoload 'clojure-mode "clojure-mode" "\
@@ -37,7 +37,7 @@ if that value is non-nil.
 
 ;;;***
 
-;;;### (autoloads nil nil ("clojure-mode-pkg.el") (20123 27899 917665))
+;;;### (autoloads nil nil ("clojure-mode-pkg.el") (20600 24611 579356))
 
 ;;;***
 

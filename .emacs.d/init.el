@@ -8,8 +8,6 @@
 (add-to-list 'load-path "~/.emacs.d/pkg/yasnippet")
 (add-to-list 'load-path "~/.emacs.d/pkg/magit")
 
-(load "pkg/gtags")
-
 ; customize emacs a bit
 (load "misc")
 (load "custom")

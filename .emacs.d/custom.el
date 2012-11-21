@@ -146,6 +146,9 @@
 
 (color-theme-tangotango)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; gtags
+(load "pkg/gtags")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
 ; for some reason emacs 23.x hangs randomly for several seconds on windows xp/7
 ; this fixes the issue
