@@ -95,6 +95,7 @@
 (global-set-key [(control x) (g) (s)] 'gtags-find-symbol)
 (global-set-key [(control x) (g) (r)] 'gtags-find-rtag)
 (global-set-key [(control x) (g) (t)] 'gtags-find-tag)
+(global-set-key [(meta *)] 'gtags-pop-stack)
 
 (defun shell-filter-region ( command )
   (interactive (list (read-shell-command "Filter to apply: ")))
