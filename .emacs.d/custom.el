@@ -140,12 +140,9 @@
 (setq diff-default-read-only t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; nice colors
-; color themes
-; (load "pkg/color-theme")
-(load "pkg/color-theme-tangotango")
-(load "pkg/color-theme-zenburn")
-
-(color-theme-tangotango)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/pkg/themes")
+;(load-theme 'zenburn t)
+(load-theme 'tangotango t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; gtags
 (load "pkg/gtags")
