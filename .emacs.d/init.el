@@ -9,8 +9,9 @@
 (add-to-list 'load-path "~/.emacs.d/pkg/magit")
 
 ; customize emacs a bit
-(load "misc")
 (load "custom")
+(load "misc")
+(load "fmj")
 
 ; start server
 (if (and (fboundp 'server-running-p) 
@@ -54,5 +55,5 @@
 
 ; elpa/package archives
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")))
-
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
