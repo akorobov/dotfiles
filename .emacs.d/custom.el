@@ -74,6 +74,11 @@
 (global-set-key (kbd "M-1") 'delete-other-windows)
 (global-set-key (kbd "M-0") 'delete-window)
 
+(global-set-key (kbd "C-c <left>")  'windmove-left)
+(global-set-key (kbd "C-c <right>") 'windmove-right)
+(global-set-key (kbd "C-c <up>")    'windmove-up)
+(global-set-key (kbd "C-c <down>")  'windmove-down)
+
 (global-set-key [(meta j)] 'goto-line)
 (global-set-key [(meta g)] 'grep)
 (global-set-key [(meta q)] 'kill-buffer)
@@ -141,8 +146,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; nice colors
 (add-to-list 'custom-theme-load-path "~/.emacs.d/pkg/themes")
-;(load-theme 'zenburn t)
-(load-theme 'tangotango t)
+(load-theme 'zenburn t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; gtags
 (load "pkg/gtags")
