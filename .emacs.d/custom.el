@@ -122,16 +122,6 @@
 
 (global-set-key [(meta \\)] 'my-match-paren)       ; Bounce across parens, like in vi.
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; use yasnippet
-(defun init-yas ()
-   (require 'yasnippet)
-   (yas/initialize)
-   (yas/load-directory "~/.emacs.d/pkg/yasnippet/snippets")
-)
-(init-yas)
-
-
 ;; auto-complete 
 (add-to-list 'load-path "~/.emacs.d/pkg/auto-complete")
 (require 'auto-complete-config)
@@ -168,7 +158,6 @@
 
 ; flymake hangs emacs on osx
 (require 'flymake)
-(require 'flymake-cursor)
 (setq flymake-gui-warnings-enabled nil)
 
 ; color flymake
@@ -195,3 +184,24 @@
      (ibuffer-awhen (or (buffer-local-value 'buffer-file-name buf)
                         (buffer-local-value 'dired-directory buf))
        (string-match qualifier it))))
+
+;;;;; misc utility functions
+; Select everything
+(defun select-all ()
+  (interactive)
+  (set-mark (point-min))
+  (goto-char (point-max)))
+
+; Insert the date
+(defun insert-date ()
+  "Insert date at point."
+  (interactive)
+  (insert (format-time-string "%a %b %e, %Y %l:%M %p")))
+
+(defun read-lines (file)
+  "returns a list of lines read from a file with given name."
+  (with-temp-buffer
+    (insert-file-contents file)
+    (split-string
+     (buffer-string) "\n" t)
+    ) )
