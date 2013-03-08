@@ -6,5 +6,5 @@
 !.emacs.d
 !.emacs.d/**
 !.emacs
-!.emacs/**
+!.emacs/
 !.emacs.el
