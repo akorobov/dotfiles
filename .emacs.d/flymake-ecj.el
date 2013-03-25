@@ -1,14 +1,6 @@
-;; Copyright 2012 Alexander Korobov
 ;; Author: akorobov@gmail.com
-;; License: BSD
 
-;; Configures flymake to use eclipse batch compiler with source/class-path information extracted from eclipse's classpath project file
-
-;; todo list
-;; - ability to use ecj as incremental compiler
-;; - extract source/compiler settings from eclipse's .settings/org.eclipse.jdt.core.prefs
-;; - run ecj as a compile server
-
+;; Java syntax checking using flymake with eclipse batch compiler. Uses source/class-path information extracted from eclipse classpath project file
 (require 'xml)
 (require 'flymake)
 
@@ -86,12 +78,8 @@
          (local-file (file-relative-name
                       temp-file
                       (file-name-directory buffer-file-name))))
-    ; do not generate class but only check syntax, one drawback of this is 
+    ; do not generate class but only check syntax, one drawback is 
     ; ecj work for single file and won't pick up changes in other buffers/files
-    ; tbd consider making ecj to do incremental compilation of project 
-    ; (this would be rather difficult due to arbitrary structure of the project - 
-    ; i.e. different source directories might be placed in different classpath directories and/or have complex dependencies between each other)
-    ; so consider auto-detecting some standard project layouts and 
     (list "java" (list "-jar" fmj/ecj-path 
                        "-source" fmj/source-version 
                        "-target" fmj/source-version 
@@ -116,4 +104,4 @@
 
 (push '(".+\\.java$" fmj/init fmj/cleanup) flymake-allowed-file-name-masks)
 
-(provide 'fmj)
+(provide 'flymake-ecj)

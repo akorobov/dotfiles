@@ -135,11 +135,7 @@
 (setq diff-default-read-only t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; nice colors
-(add-to-list 'custom-theme-load-path "~/.emacs.d/pkg/themes")
-(load-theme 'zenburn t)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; gtags
-(load "pkg/gtags")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
 ; for some reason emacs 23.x hangs randomly for several seconds on windows xp/7
@@ -156,16 +152,6 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-; flymake hangs emacs on osx
-(require 'flymake)
-(setq flymake-gui-warnings-enabled nil)
-
-; 
-(defun enable-clang-ac ()
-  (interactive)
-  (require 'auto-complete-clang)
-  (setq ac-sources (append '(ac-source-clang) ac-sources)))
-
 ; include dired buffers when filtering by path
 (eval-after-load "ibuf-ext"
   '(define-ibuffer-filter path
@@ -176,7 +162,7 @@
                         (buffer-local-value 'dired-directory buf))
        (string-match qualifier it))))
 
-;;;;; misc utility functions
+;;; misc utility functions
 ; Select everything
 (defun select-all ()
   (interactive)

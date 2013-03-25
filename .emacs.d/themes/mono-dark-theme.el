@@ -35,9 +35,9 @@
 
    ;; Mode line faces
    `(minibuffer-prompt ((t (:foreground ,orange))))
-   `(mode-line-buffer-id ((t (:foreground ,dgray :weight bold))))
+   `(mode-line-buffer-id ((t (:foreground ,lgray+1 :weight bold))))
    `(mode-line ((,class (:box (:line-width -1 :style released-button)
-                              :background ,sgray :foreground ,lgray+2))))
+                              :background ,sgray :foreground ,lgray+1))))
    `(mode-line-inactive ((,class (:box (:line-width -1 :style released-button)
                                        :background ,bg
                                        :foreground ,lgray))))
@@ -64,6 +64,7 @@
    `(font-lock-variable-name-face ((t ( :foreground ,white))))
    `(font-lock-warning-face ((t (:foreground ,orange))))
    `(font-lock-preprocessor-face ((t (:foreground ,white))))
+   `(sh-quoted-exec ((t (:foreground ,lgray))))
 
    ;; compilation
    `(compilation-column-face ((t (:foreground ,white))))
@@ -73,8 +74,8 @@
    `(compilation-info-face ((t (:foreground ,dgray))))
    `(compilation-info ((t (:foreground ,lgray+1 :underline t))))
    `(compilation-leave-directory-face ((t (:foreground ,dgray))))
-   `(compilation-line-face ((t (:foreground ,lgray+1))))
-   `(compilation-line-number ((t (:foreground ,lgray+1))))
+   `(compilation-line-face ((t (:background ,bg :foreground ,lgray+1))))
+   `(compilation-line-number ((t (:background ,bg :foreground ,lgray+1))))
    `(compilation-message-face ((t (:foreground ,lgray))))
    `(compilation-warning-face ((t (:foreground ,dgray :weight bold :underline t))))
 
@@ -86,18 +87,16 @@
    `(match ((t (:background ,orange :foreground ,dgray ))))
 
    ;; diff
-   `(diff-added ((,class (:foreground ,white))
-                 (t (:foreground ,white))))
+   `(diff-header ((t (:background ,bg :foreground ,lgray))))
+   `(diff-file-header ((t (:background ,bg :foreground ,lgray :bold t))))
+   `(diff-index-face ((t (:background ,bg :foreground ,lgray :bold t))))
+   `(diff-context ((t (:foreground ,lgray))))
+   `(diff-added ((t (:foreground ,white))))
+   `(diff-removed ((t (:foreground ,lgray+2))))
    `(diff-changed ((t (:foreground ,orange :background ,bg))))
+   `(diff-refine-added ((t (:background ,bg :foreground ,orange :bold t))))
+   `(diff-refine-removed ((t (:background ,bg :foreground ,lgray :bold t))))
    `(diff-refine-change ((t (:weight bold :foreground ,orange :background ,bg))))
-   `(diff-removed ((,class (:foreground ,lgray))
-                   (t (:foreground ,lgray))))
-   `(diff-header ((,class (:background ,bg))
-                  (t (:background ,bg :foreground ,dgray))))
-   `(diff-file-header ((,class (:background ,bg :foreground ,lgray+2 :bold t))
-                       (t (:background ,bg :foreground ,sgray :bold t))))
-   `(diff-index-face ((,class (:background ,bg :foreground ,dgray :bold t))
-                      (t (:background ,bg :foreground ,sgray :bold t))))
 
 
    ;; Button and link faces

@@ -11,7 +11,8 @@
       (sgray "#606060")
       (sgray+1 "#707070")
       (orange "#FF9912")
-      (green  "#5f5f00"))
+      (green  "#5f5f00")
+      (red  "#B51816"))
 
   (custom-theme-set-faces
    'mono-light
@@ -26,7 +27,7 @@
    `(secondary-selection ((,class (:foreground: ,white :background ,sgray))))
    `(isearch ((,class (:foreground ,white :background ,orange))))
    `(lazy-highlight ((,class (:foreground ,white :background ,sgray))))
-   `(trailing-whitespace ((,class (:background "red"))))
+   `(trailing-whitespace ((,class (:background ,red))))
 
    ;; Mode line faces
    `(mode-line-buffer-id ((t (:foreground ,black :weight bold))))
@@ -39,7 +40,7 @@
    ;; Escape and prompt faces
     `(minibuffer-prompt ((,class (:weight bold :foreground ,dgray))))
     `(escape-glyph ((,class (:foreground ,dgray))))
-    `(error ((,class (:background ,white :weight bold :foreground "red"))))
+    `(error ((,class (:background ,white :weight bold :foreground ,red))))
     `(warning ((,class (:background ,white :foreground ,orange))))
     `(success ((,class (:background ,dgray :foreground ,green))))
 
@@ -56,8 +57,9 @@
    `(font-lock-string-face ((t (:foreground ,sgray))))
    `(font-lock-type-face ((t (:foreground ,dgray))))
    `(font-lock-variable-name-face ((t ( :foreground ,dgray))))
-   `(font-lock-warning-face ((t (:foreground ,orange))))
+   `(font-lock-warnODing-face ((t (:foreground ,orange))))
    `(font-lock-preprocessor-face ((t (:foreground ,dgray))))
+   `(sh-quoted-exec ((t (:foreground ,sgray))))
 
    ;; compilation
    `(compilation-column-face ((t (:foreground ,dgray))))
@@ -67,8 +69,8 @@
    `(compilation-info-face ((t (:foreground ,dgray))))
    `(compilation-info ((t (:foreground ,dgray :underline t))))
    `(compilation-leave-directory-face ((t (:foreground ,dgray))))
-   `(compilation-line-face ((t (:foreground ,dgray))))
-   `(compilation-line-number ((t (:foreground ,dgray))))
+   `(compilation-line-face ((t (:background ,white :foreground ,dgray))))
+   `(compilation-line-number ((t (:background ,white :foreground ,dgray))))
    `(compilation-message-face ((t (:foreground ,dgray))))
    `(compilation-warning-face ((t (:foreground ,dgray :weight bold :underline t))))
 
@@ -80,20 +82,16 @@
    `(match ((t (:background ,orange :foreground ,dgray))))
 
    ;; diff
-   `(diff-added ((,class (:foreground ,dgray))
-                 (t (:foreground ,dgray))))
+   `(diff-header ((t (:background ,white :foreground ,dgray))))
+   `(diff-file-header ((t (:background ,white :foreground ,dgray :bold t))))
+   `(diff-index-face ((t (:background ,white :foreground ,dgray :bold t))))
+   `(diff-context ((t (:foreground ,lgray))))
+   `(diff-added ((t (:foreground ,dgray))))
+   `(diff-removed ((t (:foreground ,lgray))))
    `(diff-changed ((t (:foreground ,orange))))
+   `(diff-refine-added ((t (:weight bold :foreground "#ff5f00" :background ,white))))
+   `(diff-refine-removed ((t (:weight bold :foreground "#ff5f00" :background ,white))))
    `(diff-refine-change ((t (:weight bold :foreground "#ff5f00" :background ,white))))
-   `(diff-removed ((,class (:foreground ,sgray))
-                   (t (:foreground ,lgray))))
-   `(diff-header ((,class (:background ,white))
-                  (t (:background ,white :foreground ,dgray))))
-   `(diff-file-header
-     ((,class (:background ,white :foreground ,dgray :bold t))
-      (t (:background ,white :foreground ,dgray :bold t))))
-   `(diff-index-face
-     ((,class (:background ,white :foreground ,dgray :bold t))
-      (t (:background ,white :foreground ,dgray :bold t))))
 
 
    ;; Button and link faces
@@ -105,13 +103,12 @@
    `(ido-only-match ((,class (:underline ,dgray :foreground ,dgray))))
    `(ido-subdir ((,class (:weight bold :foreground ,black))))
 
-   `(flymake-errline ((t (:underline t :background "#8B0000"))))
-   `(flymake-warnline ((t (:underline t :background "#00BFBF"))))
+   `(flymake-errline ((t (:underline t :background ,white :foreground ,red))))
+   `(flymake-warnline ((t (:underline t :background ,white :foreground ,green))))
 
    `(magit-section-title ((t (:foreground ,dgray :weight bold))))
    `(magit-branch ((t (:foreground ,orange :weight bold))))
    `(magit-item-highlight ((t (:background ,white-1))))
-
    )
 
   (custom-theme-set-variables

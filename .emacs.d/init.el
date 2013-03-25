@@ -1,19 +1,9 @@
 ;-*- Mode: Emacs-Lisp -*-
 
-; setup paths
-(add-to-list 'load-path "~")
 (add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/pkg")
-(add-to-list 'load-path "~/.emacs.d/pkg/org")
-(add-to-list 'load-path "~/.emacs.d/pkg/yasnippet")
-(add-to-list 'load-path "~/.emacs.d/pkg/magit")
 
-; customize emacs a bit
-(load "custom")
-(load "misc")
-(load "fmj")
-
-; start server
+;; start server
 (if (and (fboundp 'server-running-p) 
          (not (server-running-p)))
     (progn
@@ -24,56 +14,31 @@
                     (bury-buffer)
                     (switch-to-buffer-other-frame server-buf))))))
 
-
-; load language-specific packages when needed
-(defun load-scala ()
-    (interactive)
-    (add-to-list 'load-path "~/.emacs.d/pkg/scala")
-    (require 'scala-mode-auto)
-    
-    (add-hook 'scala-mode-hook
-              '(lambda ()
-                 (scala-mode-feature-electric-mode)
-               ))
-    
-    (add-to-list 'load-path "~/.emacs.d/pkg/ensime_2.9.2-0.9.8.1/elisp")
-    (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-    (require 'ensime))
-
-(defun load-haskell ()
-    (interactive)
-    (add-to-list 'load-path "~/.emacs.d/pkg/haskell-mode")
-    (load "haskell-site-file")
-    
-    (custom-set-variables
-     '(haskell-mode-hook '(turn-on-haskell-indentation))))
-
-(defun load-erlang ()
-    (interactive)
-    (load "my-erlang")
-    (erlang-shell))
-
-; packages used
 (require 'package)
+(package-initialize)
 
-; elpa/package archives
+;; elpa/package archives
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 
-
 (defvar my-packages
   '(flymake-cursor
     paredit
-    yasnippet
+    haskell-mode
+    sml-mode 
+    go-mode
+    erlang
     clojure-mode
     nrepl
     geiser
-    sml-mode
-    haskell-mode)
+    yasnippet 
+    flycheck
+    auto-complete
+    auto-complete-clang)
   "elpa packages")
 
-; install on demand
+;; install on demand
 (defun fetch-my-packages ()
   (interactive)
   (when (not package-archive-contents)
@@ -83,3 +48,6 @@
   (when (not (package-installed-p p))
     (package-install p)))
 )
+
+(load "custom")
+(load "modes")
