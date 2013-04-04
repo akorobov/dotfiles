@@ -98,7 +98,7 @@
 
 ;; flymake hangs emacs on osx
 (require 'flymake)
-(setq flymake-gui-warnings-enabled nil)
+;(setq flymake-gui-warnings-enabled nil)
 
 ;; enable clang completion 
 (defun enable-clang-ac ()
@@ -107,4 +107,4 @@
   (setq ac-sources (append '(ac-source-clang) ac-sources)))
 
 ;;; java
-(load "flymake-ecj")
+(load "flycheck-java")

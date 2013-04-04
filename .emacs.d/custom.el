@@ -100,7 +100,11 @@
 (global-set-key [(control x) (g) (s)] 'gtags-find-symbol)
 (global-set-key [(control x) (g) (r)] 'gtags-find-rtag)
 (global-set-key [(control x) (g) (t)] 'gtags-find-tag)
+(global-set-key [(control x) (g) (f)] 'gtags-find-file)
 (global-set-key [(meta *)] 'gtags-pop-stack)
+
+; retain relative paths(i.e. handle cases when parent directory is symlink)
+(setq gtags-path-style 'relative)
 
 (defun shell-filter-region ( command )
   (interactive (list (read-shell-command "Filter to apply: ")))
