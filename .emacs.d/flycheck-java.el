@@ -10,8 +10,8 @@
 
 (require 'xml)
 
-(defconst jsc/eclipse-project-file ".project")
-(defconst jsc/fmj-project-file ".project.el")
+(defconst jsc/eclipse-project-file-name ".project")
+(defconst jsc/lisp-project-file-name ".project.el")
 
 ;; by default java compiler tries to build transitive closure of source code
 ;; (all referenced classes) so in large codebases running compiler and parsing
@@ -44,15 +44,24 @@
       "java"))
     "Use drip if available, otherwise java")
 
-  (defun jsc/save-project ()
+(defun jsc/save-project ()
   (interactive)
+  "Saves project definition in file "
   (when (local-variable-p 'current-java-project)
-    (let ((proj-file-name (jsc/write-project-def jsc/fmj-project-file current-java-project)))
-      (message "Saved project definition to %S" proj-file-name))))
+    (let ((proj-file-name (jsc/write-project-def jsc/lisp-project-file-name current-java-project)))
+      ((match-end N)ssage "Saved project definition to %S" proj-file-name))))
+
 
 ;; TBD refactor
+(defun jsc/reset
+  "Clears current java syntax checker state and causes project definition to be re-read during next check"
+  (interactive)
+  (kill-local-variable 'current-java-project)
+  (kill-local-variable 'compiler-cmd-options))
+
 (defun jsc/read-project ()
   (interactive)
+  "Re-reads java project definition for current buffer"
   (kill-local-variable 'current-java-project)
   (jsc/get-ecj-compiler-options)
   ;; (let ((p (jsc/read-project-def default-directory)))
@@ -69,10 +78,10 @@
       proj-file-name)))
 
 (defun jsc/read-project-def (dir)
-  (let ((root-dir (locate-dominating-file dir jsc/fmj-project-file)))
+  (let ((root-dir (locate-dominating-file dir jsc/lisp-project-file-name)))
     (if root-dir
         (read (with-temp-buffer
-                (insert-file-contents (concat root-dir jsc/fmj-project-file))
+                (insert-file-contents (concat root-dir jsc/lisp-project-file-name))
                 (buffer-string)))
       nil)))
 
@@ -110,8 +119,8 @@
 
 ;; returns tuple of type and root directory of the project
 (defun jsc/find-project (dir)
-  (let ((eclipse-dir (locate-dominating-file dir jsc/eclipse-project-file))
-        (fmj-dir (locate-dominating-file dir jsc/fmj-project-file)))
+  (let ((eclipse-dir (locate-dominating-file dir jsc/eclipse-project-file-name))
+        (fmj-dir (locate-dominating-file dir jsc/lisp-project-file-name)))
     (if fmj-dir (cons 'lisp fmj-dir)
       (if eclipse-dir (cons 'eclipse eclipse-dir)
         (let* ((paths (cdr (assoc 'paths jsc/default-java-project)))
@@ -129,7 +138,9 @@
     
     (case (car project-info)
       (eclipse (jsc/read-eclipse-project root-dir))
-      (lisp (jsc/read-project-def root-dir))
+      (lisp
+       (cons (cons 'project-dir root-dir)
+             (jsc/read-project-def root-dir)))
       (standard (cons
                  (cons 'project-dir root-dir)
                  (copy-alist jsc/default-java-project)))
@@ -139,10 +150,9 @@
 
 
 (defun jsc/expand-lib-path (d)
-  (let ((absd (expand-file-name d project-dir))
-        (prefix (lambda (f) (concat d "/" f))))
+  (let ((absd (expand-file-name d project-dir)))
     (when (file-exists-p absd)
-      (mapcar prefix  (directory-files absd nil ".*\\(jar\\|zip\\)")))))
+      (directory-files absd nil ".*\\(jar\\|zip\\)"))))
 
 (defun jsc/expand-lib-paths (project-dir p)
   (if (assoc 'libs p)
@@ -178,6 +188,10 @@
       (setq-local compiler-cmd-options opts)))
   compiler-cmd-options)
 
+(defun jsc/compile ()
+  (interactive)
+  
+  )
 (when (featurep 'flycheck-autoloads)
   (flycheck-declare-checker java-syntax
     "Check syntax of java code using ecj compiler"
