@@ -141,11 +141,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; nice colors
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
-; for some reason emacs 23.x hangs randomly for several seconds on windows xp/7
-; this fixes the issue
-(setq w32-get-true-file-attributes nil)
-
 ; always split horizontally
 ;(setq split-width-threshold 0)
 ;(setq split-height-threshold nil)
@@ -158,13 +153,15 @@
 
 ; include dired buffers when filtering by path
 (eval-after-load "ibuf-ext"
-  '(define-ibuffer-filter path
-       "Toggle current view to buffers with file or directory name matching QUALIFIER."
-     (:description "path"
-          :reader (read-from-minibuffer "Filter by file/directory name (regexp): "))
-     (ibuffer-awhen (or (buffer-local-value 'buffer-file-name buf)
-                        (buffer-local-value 'dired-directory buf))
-       (string-match qualifier it))))
+  '(progn 
+     (define-ibuffer-filter path
+         "Toggle current view to buffers with file or directory name matching QUALIFIER."
+       (:description "path"
+                     :reader (read-from-minibuffer "Filter by file/directory name (regexp): "))
+       (ibuffer-awhen (or (buffer-local-value 'buffer-file-name buf)
+                          (buffer-local-value 'dired-directory buf))
+         (string-match qualifier it)))
+     (setq ibuffer-show-empty-filter-groups nil)))
 
 ;;; misc utility functions
 ; Select everything
@@ -185,4 +182,4 @@
     (insert-file-contents file)
     (split-string
      (buffer-string) "\n" t)
-    ) )
+    ))

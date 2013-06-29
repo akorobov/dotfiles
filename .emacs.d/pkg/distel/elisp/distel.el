@@ -139,7 +139,7 @@ about Emacs' online help, use \"\\[help-for-help]\".
     ("\C-c\C-da" erl-fdoc-apropos)
     ("\C-c\C-dw" erl-who-calls)
     ("\C-c\C-dn" erl-choose-nodename)
-    ("("         erl-openparen)
+    ;("("         erl-openparen)
     ;; Possibly "controversial" shorter keys
     ("\M-."      erl-find-source-under-point)	; usually `find-tag'
     ("\M-*"      erl-find-source-unwind) ; usually `pop-tag-mark'
