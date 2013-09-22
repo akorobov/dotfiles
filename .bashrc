@@ -8,7 +8,7 @@ shopt -s histappend
 #fi
 
 export EDITOR=vi
-
+alias gl='git log --abbrev-commit'
 alias glt='git log --graph --full-history --pretty=format:"%h%x09%d%x20%s"'
 alias glta='git log --graph --full-history  --pretty=format:"%h%x09%cr%x09%cn%x09%d%x20%s"'
 alias gs='git status'

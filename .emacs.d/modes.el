@@ -94,7 +94,8 @@
              (make-clang-pattern "error" 'error)
              (make-clang-pattern "fatal error" 'error))
        :modes '(c-mode c++-mode cc-mode))
-     (add-to-list 'flycheck-checkers 'c-clang-syntax)))
+     (add-to-list 'flycheck-checkers 'c-clang-syntax)
+     (load "flycheck-java")))
 
 
 ;; flymake hangs emacs on osx
@@ -106,4 +107,3 @@
   (setq ac-sources (append '(ac-source-clang) ac-sources)))
 
 ;;; java
-(load "flycheck-java")

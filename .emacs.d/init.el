@@ -3,6 +3,8 @@
 (add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/pkg")
 
+(add-to-list 'exec-path "~/bin")
+
 ;; start server
 (if (and (fboundp 'server-running-p) 
          (not (server-running-p)))
