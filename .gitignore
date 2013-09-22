@@ -1,5 +1,4 @@
 # Ignore everything
-/*
 *.elc
 # except following
 !.gitignore
