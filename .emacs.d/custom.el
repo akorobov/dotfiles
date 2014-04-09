@@ -126,12 +126,6 @@
 
 (global-set-key [(meta \\)] 'my-match-paren)       ; Bounce across parens, like in vi.
 
-;; auto-complete 
-(add-to-list 'load-path "~/.emacs.d/pkg/auto-complete")
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/pkg/auto-complete/ac-dict")
-(ac-config-default)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; use recentf
 (recentf-mode)
 

@@ -1,7 +1,11 @@
 ;; adjust settings for various prog modes
 
+;; use company-mode by default
+(global-company-mode)
 
-(load "pkg/gtags")
+(eval-after-load 'projectile
+  '(progn
+     (setq projectile-cache-project t)))
 
 ;;; scala
 (defun init-scala ()
@@ -49,61 +53,37 @@
      (defconst distel-shell-keys
        '(("\C-\M-i"   erl-complete)
          ("\M-?"      erl-complete)
-         ("\C-TAB"    auto-complete)
          ("\M-."      erl-find-source-under-point)
          ("\M-,"      erl-find-source-unwind)
          ("\M-*"      erl-find-source-unwind)
          )
        "Additional keys to bind when in Erlang shell.")
 
-     (defconst my-distel-keys
-       '(("\C-TAB"    auto-complete)
-         ("\M-TAB"    auto-complete))
-       "Additional key bindings for erlang-mode")
-
      (add-hook 'erlang-shell-mode-hook
                (lambda ()
                  (dolist (spec distel-shell-keys)
                    (define-key erlang-shell-mode-map (car spec) (cadr spec)))))
 
-                                        ; auto-complete mode in erlang
-     (add-to-list 'ac-modes 'erlang-mode)
+     ;; auto-completion for erlang/distel
+     (add-to-list 'load-path "~/.emacs.d/pkg/company-distel")
+     (require 'company-distel)
+     (require 'company-distel-frontend)
+     (add-to-list 'company-backends 'company-distel)
+     ))
 
-     (require  'auto-complete-distel)
-     (add-hook 'erlang-mode-hook '(lambda () (setq ac-sources '(ac-source-distel ac-source-yasnippet ac-source-words-in-same-mode-buffers))))
-     (define-key erlang-extended-mode-map (kbd "<C-tab>")  'auto-complete)))
-
-;;; c/c++
-;;; use flycheck with clang for syntax check and ac-clang for auto completion
+;; flycheck adjustments
 (eval-after-load 'flycheck
   '(progn
      (setq flycheck-highlighting-mode 'lines)
-     (defun make-clang-pattern (str level)
-       (list (concat "^\\(?1:.*\\):\\(?2:[0-9]+\\):\\(?3:[0-9]+\\): " str ": +\\(?4:.*\\)$") level))
-
-     (flycheck-declare-checker c-clang-syntax
-       "Check file using clang's syntax checker."
-       :command '("clang"
-                  "-fsyntax-only"
-                  "-fno-diagnostics-show-option"
-                  "-fno-caret-diagnostics"
-                  source-inplace)
-       :error-patterns
-       (list (make-clang-pattern "warning" 'warning)
-             (make-clang-pattern "note" 'warning)
-             (make-clang-pattern "error" 'error)
-             (make-clang-pattern "fatal error" 'error))
-       :modes '(c-mode c++-mode cc-mode))
-     (add-to-list 'flycheck-checkers 'c-clang-syntax)
      (load "flycheck-java")))
 
-
-;; flymake hangs emacs on osx
-
-;; enable clang completion 
-(defun enable-clang-ac ()
+;; to switch between single-line and multi-line comments
+(defun cpp-comments ()
   (interactive)
-  (require 'auto-complete-clang)
-  (setq ac-sources (append '(ac-source-clang) ac-sources)))
+  (setq-local comment-start "//")
+  (setq-local comment-end   ""))
 
-;;; java
+(defun c-comments ()
+  (interactive)
+  (setq-local comment-start "/*")
+  (setq-local comment-end   "*/"))

@@ -25,19 +25,23 @@
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 (defvar my-packages
-  '(flymake-cursor
-    paredit
+  '(paredit
     haskell-mode
     sml-mode 
     go-mode
     erlang
     clojure-mode
-    nrepl
+    cider
     geiser
     yasnippet 
     flycheck
+    company
+    company-go
+    company-jedi
     auto-complete
-    auto-complete-clang)
+    auto-complete-clang
+    projectile
+    ggtags)
   "elpa packages")
 
 ;; install on demand

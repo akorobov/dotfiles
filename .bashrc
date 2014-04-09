@@ -1,5 +1,7 @@
 export HISTSIZE=2000
 
+export PATH=~/bin:$PATH
+
 # append history
 shopt -s histappend
 
