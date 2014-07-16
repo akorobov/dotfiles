@@ -177,3 +177,36 @@
     (split-string
      (buffer-string) "\n" t)
     ))
+
+;;
+(defun goto-match-paren (arg)
+  "Go to the matching parenthesis if on parenthesis. Else go to the
+   opening parenthesis one level up."
+  (interactive "p")bcms
+  (cond ((looking-at "\\s\(") (forward-list 1))
+        (t
+         (backward-char 1)
+         (cond ((looking-at "\\s\)")
+                (forward-char 1) (backward-list 1))
+               (t
+                (while (not (looking-at "\\s("))
+                  (backward-char 1)
+                  (cond ((looking-at "\\s\)")
+                         (message "->> )")
+                         (forward-char 1)
+                         (backward-list 1)
+                         (backward-char 1)))
+                  ))))))
+(global-set-key (kbd "M-\\") 'goto-match-paren)
+
+;; protect Messages and scratch buffers
+(add-hook 'kill-buffer-query-functions
+          (lambda ()
+            (if (not (member (buffer-name) '("*scratch*" "*Messages*")))
+                t
+              (bury-buffer)
+              nil)))
+
+(defun ido-define-keys () ;; C-n/p is more intuitive in vertical layout
+    (define-key ido-completion-map (kbd "SPC") 'ido-select-text))
+(add-hook 'ido-setup-hook 'ido-define-keys)

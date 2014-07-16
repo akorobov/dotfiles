@@ -1,0 +1,5 @@
+Oracle VM VirtualBox Headless Interface 4.2.16
+(C) 2008-2013 Oracle Corporation
+All rights reserved.
+
+Error: failed to start machine. Error message: Nonexistent host networking interface, name 'vboxnet0' (VERR_INTERNAL_ERROR)

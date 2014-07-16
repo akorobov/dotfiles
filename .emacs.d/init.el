@@ -1,7 +1,6 @@
 ;-*- Mode: Emacs-Lisp -*-
 
-(add-to-list 'load-path "~/.emacs.d")
-(add-to-list 'load-path "~/.emacs.d/pkg")
+(add-to-list 'load-path (concat user-emacs-directory "site-lisp"))
 
 (add-to-list 'exec-path "~/bin")
 
@@ -41,6 +40,7 @@
     auto-complete
     auto-complete-clang
     projectile
+    smartparens
     ggtags)
   "elpa packages")
 
@@ -55,5 +55,5 @@
     (package-install p)))
 )
 
-(load "custom")
-(load "modes")
+(load "~/.emacs.d/custom.el")
+(load "~/.emacs.d/modes.el")

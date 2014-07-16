@@ -75,7 +75,40 @@
 (eval-after-load 'flycheck
   '(progn
      (setq flycheck-highlighting-mode 'lines)
-     (load "flycheck-java")))
+     (load-file "~/.emacs.d/pkg/flycheck-java.el")
+     ;; enable flycheck for java and c/c++
+     (add-hook 'java-mode-hook #'flycheck-mode)
+     (add-hook 'c++-mode-hook #'flycheck-mode)))
+
+(eval-after-load 'company
+  '(progn
+     (require 'company-go)
+     (setq company-tooltip-limit 20)
+     (setq company-minimum-prefix-length 0)
+     (setq company-idle-delay .7)
+     (setq company-echo-delay 0)
+     ;; do not convert to lower case dabbrev candidates
+     (setq company-dabbrev-downcase nil) 
+     (setq company-begin-commands '(self-insert-command))
+     (define-key company-active-map (kbd "C-c C-d") 'company-show-doc-buffer)
+     (define-key company-active-map (kbd "C-/") 'company-complete-common)
+     (define-key company-active-map (kbd "<tab>") 'company-complete)
+     
+     ; close on escape
+     (define-key company-active-map (kbd "<escape>")
+       '(lambda ()
+          (interactive)
+          (company-abort)
+          (if (fboundp 'evil-normal-state)
+              (evil-normal-state))))
+     ))
+
+(eval-after-load 'go-mode
+  '(progn
+     (add-hook 'go-mode-hook (lambda ()
+                          (set (make-local-variable 'company-backends) '(company-go))
+                          (company-mode)))
+     ))
 
 ;; to switch between single-line and multi-line comments
 (defun cpp-comments ()
