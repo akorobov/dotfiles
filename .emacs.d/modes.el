@@ -75,7 +75,7 @@
 (eval-after-load 'flycheck
   '(progn
      (setq flycheck-highlighting-mode 'lines)
-     (load-file "~/.emacs.d/pkg/flycheck-java.el")
+     (load "flycheck-java")
      ;; enable flycheck for java and c/c++
      (add-hook 'java-mode-hook #'flycheck-mode)
      (add-hook 'c++-mode-hook #'flycheck-mode)))

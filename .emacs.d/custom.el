@@ -10,15 +10,12 @@
 (setq ibuffer-expert t) 
 
 (if window-system
-    ();(menu-bar-mode -1)
+    (toggle-scroll-bar -1)
     (menu-bar-mode -1))
 
-;
 (tool-bar-mode -1)
-(toggle-scroll-bar -1)
 (line-number-mode t)
 (column-number-mode t)
-(setq fill-column 78)
 
 ; keep backups
 (setq version-control t)
