@@ -1,60 +1,64 @@
+;;; mono-dark.el --- Dark monochrome theme for Emacs.
+
+;;; Commentary:
+;;
+;; Dark monochrome theme for Emacs
+;; mono: white F4F4F4 BFBFBF 8B8B8B 59595A black 484848
+
+;;; Code:
 (deftheme mono-dark
   "Dark monochrome theme")
 
 (let ((class '((class color) (min-colors 10)))
-      (bg "#383838")
-      (bg+1 "#434343")
-      (black "#080808") 
-      (white "#eaeaea") 
-      (lgray "#b3b3b3")
-      (lgray+1 "#c3c3c3")
-      (lgray+2 "#d3d3d3")
-      (dgray "#303030")
-      (dgray+1 "#404040")
-      (sgray "#606060")
-      (sgray+1 "#707070")
-      (sgray+2 "#808080")
-      (orange "#d75f00")
-      (green  "#008B00")
-      (red  "#B51816"))
-  
+      (white "#F4F4F4")
+      (lgray "#BFBFBF")
+      (mgray "#8B8B8B")
+      (dgray "#59595A")
+      (black "#484848")
+
+      (orange "#FF9912")
+      (red  "#ff2600")
+      (green  "#00f900")
+      (dgreen "#009800")
+      )
+
   (custom-theme-set-faces
    'mono-dark
 
-   `(default ((,class (:foreground ,white  :background ,bg))))
-   `(cursor ((,class (:background ,green))))
+   `(default ((,class (:foreground ,white  :background ,black))))
+   `(cursor ((,class (:background ,orange))))
 
    ;; Highlighting faces
-   `(fringe ((,class (:background ,bg))))
+   `(fringe ((,class (:background ,black))))
    `(highlight ((,class (:foreground ,white :background ,dgray))))
-   `(region ((,class (:foreground ,white :background ,sgray+1))))
-   `(secondary-selection ((,class (:foreground: ,white :background ,sgray))))
+   `(region ((,class (:foreground ,white :background ,dgray))))
+   `(secondary-selection ((,class (:foreground: ,white :background ,mgray))))
    `(isearch ((,class (:foreground ,white :background ,orange))))
    `(lazy-highlight ((,class (:foreground ,dgray :background ,lgray))))
    `(trailing-whitespace ((,class (:background ,red))))
 
    ;; Mode line faces
    `(minibuffer-prompt ((t (:foreground ,orange))))
-   `(mode-line-buffer-id ((t (:foreground ,lgray+1 :weight bold))))
+   `(mode-line-buffer-id ((t (:foreground ,white :weight bold))))
    `(mode-line ((,class (:box (:line-width -1 :style released-button)
-                              :background ,sgray :foreground ,lgray+1))))
+                              :background ,mgray :foreground ,white))))
    `(mode-line-inactive ((,class (:box (:line-width -1 :style released-button)
-                                       :background ,bg
+                                       :background ,black
                                        :foreground ,lgray))))
 
    ;; Escape and prompt faces
     `(minibuffer-prompt ((,class (:weight bold :foreground ,orange))))
     `(escape-glyph ((,class (:foreground ,dgray))))
-    `(error ((,class (:background ,bg :weight bold :underline t :foreground ,red))))
-    `(warning ((,class (:background ,dgray :foreground "yellow"))))
-    `(success ((,class (:background ,dgray :foreground "green"))))
+    `(error ((,class (:background nil :weight bold :underline t :foreground ,red))))
+    `(warning ((,class (:background nil :foreground ,orange))))
+    `(success ((,class (:background nil :foreground ,green))))
 
    ;; Font lock faces
    `(font-lock-builtin-face ((t (:foreground ,white))))
-   `(font-lock-comment-face ((t (:foreground ,sgray+2))))
-   `(font-lock-comment-delimiter-face ((t (:foreground ,sgray+2))))
-   `(font-lock-doc-face ((t (:foreground ,sgray+2))))
-   `(font-lock-doc-string-face ((t (:foreground ,sgray+2))))
+   `(font-lock-comment-face ((t (:foreground ,lgray))))
+   `(font-lock-comment-delimiter-face ((t (:foreground ,lgray))))
+   `(font-lock-doc-face ((t (:foreground ,lgray))))
+   `(font-lock-doc-string-face ((t (:foreground ,mgray))))
    `(font-lock-special-keyword-face ((t (:foreground ,white))))
    `(font-lock-constant-face ((t (:foreground ,white))))
    `(font-lock-function-name-face ((t (:foreground ,white))))
@@ -72,10 +76,10 @@
    `(compilation-error-face ((t (:foreground ,dgray :weight bold :underline t))))
    `(compilation-face ((t (:foreground ,dgray))))
    `(compilation-info-face ((t (:foreground ,dgray))))
-   `(compilation-info ((t (:foreground ,lgray+1 :background nil :underline t))))
+   `(compilation-info ((t (:foreground ,white :background nil :underline t))))
    `(compilation-leave-directory-face ((t (:foreground ,dgray))))
-   `(compilation-line-face ((t (:background ,bg :foreground ,lgray+1))))
-   `(compilation-line-number ((t (:background ,bg :foreground ,lgray+1))))
+   `(compilation-line-face ((t (:background ,black :foreground ,white))))
+   `(compilation-line-number ((t (:background ,black :foreground ,white))))
    `(compilation-message-face ((t (:foreground ,lgray))))
    `(compilation-warning-face ((t (:foreground ,dgray :weight bold :underline t))))
 
@@ -87,16 +91,16 @@
    `(match ((t (:background ,lgray :foreground ,dgray ))))
 
    ;; diff
-   `(diff-header ((t (:background ,bg :foreground ,lgray))))
-   `(diff-file-header ((t (:background ,bg :foreground ,lgray :bold t))))
-   `(diff-index-face ((t (:background ,bg :foreground ,lgray :bold t))))
-   `(diff-context ((t (:foreground ,lgray :background nil))))
-   `(diff-added ((t (:foreground "#5faf5f" :background nil))))
-   `(diff-removed ((t (:foreground "#ff5f87" :background nil))))
-   `(diff-changed ((t (:foreground ,orange :background ,bg))))
-   `(diff-refine-added ((t (:background ,bg :foreground ,orange :bold t))))
-   `(diff-refine-removed ((t (:background ,bg :foreground ,lgray :bold t))))
-   `(diff-refine-change ((t (:weight bold :foreground ,orange :background ,bg))))
+   `(diff-header ((t (:background nil :foreground ,lgray))))
+   `(diff-file-header ((t (:background nil :foreground ,lgray :bold t))))
+   `(diff-index-face ((t (:background nil :foreground ,lgray :bold t))))
+   `(diff-context ((t (:foreground ,mgray :background nil))))
+   `(diff-added ((t (:foreground ,white :background nil))))
+   `(diff-removed ((t (:foreground ,lgray :background nil))))
+   `(diff-changed ((t (:foreground ,orange :background nil))))
+   `(diff-refine-added ((t (:foreground ,orange :bold t :background nil))))
+   `(diff-refine-removed ((t (:background nil :foreground ,lgray :bold t))))
+   `(diff-refine-change ((t (:weight bold :foreground ,orange :background ,black))))
 
 
    ;; Button and link faces
@@ -104,19 +108,27 @@
    `(link-visited ((,class (:underline t :foreground ,lgray))))
 
    ;; ido
-   `(ido-first-match ((,class (:foreground ,dgray))))
-   `(ido-only-match ((,class (:underline ,dgray :foreground ,dgray))))
-   `(ido-subdir ((,class (:weight bold :foreground ,black))))
+   `(ido-first-match ((,class (:foreground ,white))))
+   `(ido-only-match ((,class (:foreground ,lgray))))
+   `(ido-dir ((,class (:foreground ,lgray))))
+   `(ido-subdir ((,class (:weight bold :foreground ,white))))
 
    ;; magit
    `(magit-section-title ((t (:foreground ,dgray :weight bold))))
    `(magit-branch ((t (:foreground ,orange :weight bold))))
-   `(magit-item-highlight ((t (:background ,bg+1))))
-)
+   `(magit-item-highlight ((t (:background ,black))))
+
+   `(company-tooltip ((,class (:background ,dgray))))
+   `(company-scrollbar-bg ((,class (:background ,dgray))))
+
+   ;; flycheck
+   `(flycheck-error-face ((t (:foreground ,red :weight bold :underline t))))
+   `(flycheck-warning-face ((t (:foreground ,orange :weight bold :underline t :background nil))))
+   )
 
   (custom-theme-set-variables
    'mono-dark
-   `(ansi-color-names-vector [,white ,dgray ,lgray ,sgray])))
+   `(ansi-color-names-vector [,white ,dgray ,lgray ,mgray ,black ,red ,green ,orange])))
 
 (provide-theme 'mono-dark)
 

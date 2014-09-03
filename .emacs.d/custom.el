@@ -179,7 +179,7 @@
 (defun goto-match-paren (arg)
   "Go to the matching parenthesis if on parenthesis. Else go to the
    opening parenthesis one level up."
-  (interactive "p")bcms
+  (interactive "p")
   (cond ((looking-at "\\s\(") (forward-list 1))
         (t
          (backward-char 1)
