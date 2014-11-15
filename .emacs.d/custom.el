@@ -4,9 +4,6 @@
 ; no splash
 (setq inhibit-startup-message t)
 
-; faster switching between buffers
-(iswitchb-mode 1)
-
 (setq ibuffer-expert t) 
 
 (if window-system
@@ -33,15 +30,6 @@
 ; use spaces
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
-
-; fix default c- and cperl- mode indentations
-(setq c-default-style "linux"
-      c-basic-offset 4)
-(setq cperl-continued-statement-offset 0
-      cperl-indent-level 4
-      cperl-indent-parens-as-block t
-      cperl-close-paren-offset -4 )
-(setq nxml-child-indent 4)
 
 ; don't get lost
 (show-paren-mode t)
@@ -130,7 +118,7 @@
 (setq diff-default-read-only t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; nice colors
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/themes")
 
 ; always split horizontally
 ;(setq split-width-threshold 0)
@@ -207,3 +195,6 @@
 (defun ido-define-keys () ;; C-n/p is more intuitive in vertical layout
     (define-key ido-completion-map (kbd "SPC") 'ido-select-text))
 (add-hook 'ido-setup-hook 'ido-define-keys)
+
+;;
+(ido-mode t)

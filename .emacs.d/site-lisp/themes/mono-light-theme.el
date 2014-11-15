@@ -117,7 +117,7 @@
 
    `(magit-section-title ((t (:foreground ,dgray :weight bold))))
    `(magit-branch ((t (:foreground ,orange :weight bold))))
-   `(magit-item-highlight ((t (:background ,lgray))))
+   `(magit-item-highlight ((t (:background nil))))
 
    `(company-tooltip ((,class (:background ,lgray))))
    `(company-scrollbar-bg ((,class (:background ,lgray))))
@@ -125,6 +125,10 @@
    `(flycheck-error-face ((t (:foreground ,red :weight bold :underline t))))
    `(flycheck-warning-face ((t (:foreground ,orange :weight bold :underline t :background nil))))
    )
+
+  ;; smartparens
+  `(sp-show-pair-mismatch-face ((t (:background ,red))))
+  `(sp-pair-overlay-face ((t (:background ,lgray))))
 
   (custom-theme-set-variables
    'mono-light

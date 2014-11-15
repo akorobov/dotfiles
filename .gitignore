@@ -1,9 +1,5 @@
-# Ignore everything
-*.elc
-# except following
-!.gitignore
-!.emacs.d
-!.emacs.d/**
-!.emacs
-!.emacs/
-!.emacs.el
+.ssh
+vagrant/dist-files/**
+**/.vagrant/**
+.#*
+**/*~

@@ -1,5 +1,14 @@
 ;; adjust settings for various prog modes
 
+(setq c-default-style "k&r"
+      c-basic-offset 4)
+
+(setq cperl-continued-statement-offset 0
+      cperl-indent-level 4
+      cperl-indent-parens-as-block t
+      cperl-close-paren-offset -4 )
+
+
 ;; use company-mode by default
 (global-company-mode)
 
@@ -84,7 +93,7 @@
   '(progn
      (require 'company-go)
      (setq company-tooltip-limit 20)
-     (setq company-minimum-prefix-length 0)
+     (setq company-minimum-prefix-length 1)
      (setq company-idle-delay .7)
      (setq company-echo-delay 0)
      ;; do not convert to lower case dabbrev candidates
