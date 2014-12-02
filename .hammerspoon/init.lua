@@ -1,20 +1,21 @@
-local application = require "mjolnir.application"
-local window = require "mjolnir.window"
-local hotkey = require "mjolnir.hotkey"
-local fnutils = require "mjolnir.fnutils"
-local alert = require "mjolnir.alert"
--- local grid = require "mjolnir.sd.grid"
+local grid = hs.grid
+local window = hs.window
+local hotkey = hs.hotkey
 
-local grid = require "grid"
+window.animation_duration = 0
+grid.GRIDHEIGHT = 8
+grid.GRIDWIDTH = 16
+grid.MARGINX = 0
+grid.MARGINY = 0
 
 local mash = {"cmd", "alt", "ctrl"}
 local mashshift = {"cmd", "alt", "shift"}
 
 -- requires: grid, fnutils, alert
 
-local function opendictionary()
-  application.launchorfocus("Dictionary")
-end
+-- local function opendictionary()
+--   application.launchorfocus("Dictionary")
+-- end
 
 hotkey.bind(mash, 'D', opendictionary)
 
