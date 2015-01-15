@@ -26,7 +26,7 @@
   (custom-theme-set-faces
    'mono-light
 
-   `(default ((,class (:foreground ,black :background ,white))))
+   `(default ((,class (:foreground ,black :background ,white :weight normal))))
    `(cursor ((,class (:background ,dgreen))))
 
    ;; Highlighting faces
@@ -94,10 +94,10 @@
    `(diff-header ((t (:background nil :foreground ,dgray))))
    `(diff-file-header ((t (:background nil :foreground ,dgray :bold t))))
    `(diff-index-face ((t (:background nil :foreground ,dgray :bold t))))
-   `(diff-context ((t (:foreground ,lgray))))
-   `(diff-added ((t (:foreground ,black))))
-   `(diff-removed ((t (:foreground ,mgray))))
-   `(diff-changed ((t (:foreground ,orange))))
+   `(diff-context ((t (:background nil :foreground ,lgray))))
+   `(diff-added ((t (:background nil :foreground ,black :weight normal))))
+   `(diff-removed ((t (:background nil :foreground ,mgray :weight normal))))
+   `(diff-changed ((t (:background nil :foreground ,orange))))
    `(diff-refine-added ((t (:weight bold :foreground "#ff5f00" :background nil))))
    `(diff-refine-removed ((t (:weight bold :foreground "#ff5f00" :background nil))))
    `(diff-refine-change ((t (:weight bold :foreground "#ff5f00" :background nil))))
