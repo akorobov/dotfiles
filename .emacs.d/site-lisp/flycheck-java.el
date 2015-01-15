@@ -35,8 +35,23 @@
 ;; stale data.
 (defvar flycheck-java-no-sourcepath t)
 
-(flycheck-def-option-var flycheck-java-ecj-jar-path (expand-file-name  "~/dev/tools/ecj-4.2.jar") java
+(flycheck-def-option-var flycheck-java-ecj-jar-path
+    (expand-file-name  "~/dev/tools/ecj-4.4.1.jar") java
   "A path to ECJ jar file."
+  :type 'string
+  :package-version '(flycheck . "0.17")
+  :safe #'stringp)
+
+(flycheck-def-option-var flycheck-java-checkstyle-jar-path
+    (expand-file-name  "~/dev/tools/checkstyle-5.7-all.jar") java
+  "A path to checkstyle-X.Y-all.jar file."
+  :type 'string
+  :package-version '(flycheck . "0.17")
+  :safe #'stringp)
+
+(flycheck-def-option-var flycheck-java-checkstyle-config-path
+    (expand-file-name  "~/dev/tools/checkstyle.xml") java
+  "A path to checkstyle.xml configuration file."
   :type 'string
   :package-version '(flycheck . "0.17")
   :safe #'stringp)
@@ -44,8 +59,8 @@
 ;; Template of tandard java project 
 (defconst flycheck-java-standard-java-project-def
   '(:type :standard
-    :source "1.6"
-    :target "1.6"
+    :source "1.7"
+    :target "1.7"
     :options "-warn:+over-ann,uselessTypeCheck -proceedOnError -maxProblems 100"
 
     ;; source directory -> class directory mappings
@@ -160,6 +175,17 @@
   flycheck-java-cmdopts)
 
 
+(flycheck-define-checker java-checkstyle
+  "Checkstyle java code."
+  :command ("java"
+            (option "-jar" flycheck-java-checkstyle-jar-path)
+            "/Users/ak/dev/tools/checkstyle-5.7-all.jar"
+            (option "-c" flycheck-java-checkstyle-config-path)
+            "-f" "xml" source)
+  :error-parser flycheck-parse-checkstyle
+  :modes java-mode)
+
+
 (flycheck-define-checker java
   "Java syntax checker using ecj batch compiler."
   :command ("java" 
@@ -172,7 +198,8 @@
             (message (zero-or-more not-newline)) line-end)
    (error line-start (file-name) ":" line ": error:" 
           (message (zero-or-more not-newline)) line-end))
-  :modes java-mode)
+  :modes java-mode
+  )
 
 (add-to-list 'flycheck-checkers 'java)
 
