@@ -1,3 +1,2 @@
-
 [[ -r ~/.bashrc ]] && . ~/.bashrc
 

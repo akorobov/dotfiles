@@ -4,8 +4,11 @@
 
 (add-to-list 'exec-path "~/bin")
 
+;; ensure temporary directory path is absolute
+(setq temporary-file-directory (file-truename temporary-file-directory))
+
 ;; start server
-(if (and (fboundp 'server-running-p) 
+(if (and (fboundp 'server-running-p)
          (not (server-running-p)))
     (progn
       (server-start)
@@ -24,25 +27,22 @@
                          ("melpa" . "http://melpa.org/packages/")))
 
 (defvar my-packages
-  '(paredit
-    haskell-mode
-    sml-mode 
-    go-mode
-    erlang
-    clojure-mode
-    cider
-    geiser
-    yasnippet 
+  '(company
     flycheck
-    company
-    company-go
-    company-jedi
-    auto-complete
-    auto-complete-clang
     projectile
     smartparens
+    erlang
+    haskell-mode
+    clojure-mode
+    cider
+    web-mode
+    yasnippet
+    go-mode
+    company-go
+    helm
+    paredit
     ggtags)
-  "elpa packages")
+  "my packages")
 
 ;; install on demand
 (defun fetch-my-packages ()
