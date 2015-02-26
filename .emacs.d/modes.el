@@ -88,7 +88,34 @@
 
 (eval-after-load 'ggtags
   '(progn
-     (setq ggtags-global-abbreviate-filename 60)))
+     (global-set-key (kbd "C-x \\")  'ggtags-find-tag-dwim)
+     ))
+
+(when (require 'helm-projectile nil 'noerror)
+  (global-set-key (kbd "C-x /")  'helm-projectile))
+
+(eval-after-load 'smartparens
+  '(progn
+     (setq sp-highlight-pair-overlay nil)
+     ;; do not autoinsert ' pair if the point is preceeded by word.
+     (sp-pair "'" nil :unless '(sp-point-after-word-p))
+     (sp-with-modes '(emacs-lisp-mode
+                      inferior-emacs-lisp-mode
+                      lisp-interaction-mode
+                      scheme-mode
+                      lisp-mode
+                      eshell-mode
+                      slime-repl-mode
+                      clojure-mode
+                      common-lisp-mode
+                      )
+       ;; disable ', it's the quote character!
+       (sp-local-pair "'" nil :actions nil)
+       (sp-local-pair "(" ")" :wrap "M-(")
+       ;; also only use the pseudo-quote inside strings where it serve as
+       ;; hyperlink.
+       (sp-local-pair "`" "'" :when '(sp-in-string-p)))
+     ))
 
 
 (setq c-default-style "k&r"

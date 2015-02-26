@@ -57,3 +57,6 @@
 
 (load "~/.emacs.d/custom.el")
 (load "~/.emacs.d/modes.el")
+
+(setq custom-file "~/.emacs.d/custom-vars.el")
+(load custom-file)

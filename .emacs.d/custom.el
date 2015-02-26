@@ -7,7 +7,9 @@
 (setq ibuffer-expert t) 
 
 (if window-system
-    (toggle-scroll-bar -1)
+    (progn
+      (toggle-scroll-bar -1)
+      (tool-bar-mode -1))
     (menu-bar-mode -1))
 
 (tool-bar-mode -1)
@@ -37,8 +39,10 @@
 ; delete selected region on edit
 (delete-selection-mode t)
 
-;; delete trailing spaces on save
-; (add-hook 'before-save-hook (lambda () (delete-trailing-whitespace)))
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; configure keyboard settings
 ; 'C-h l' to see last key strokes 

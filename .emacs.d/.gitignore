@@ -1,3 +1,7 @@
+/projectile*
+/tramp
+/.python-environments
+/custom-vars.el
 /elpa
 /ac-comphist.dat
 /auto-save-list
