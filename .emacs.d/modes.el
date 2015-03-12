@@ -86,10 +86,8 @@
     (when (require 'jedi nil 'noerror)
       (jedi:setup))))
 
-(eval-after-load 'ggtags
-  '(progn
-     (global-set-key (kbd "C-x \\")  'ggtags-find-tag-dwim)
-     ))
+(when (require 'ggtags nil 'noerror)
+  (global-set-key (kbd "C-x \\")  'ggtags-find-tag-dwim))
 
 (when (require 'helm-projectile nil 'noerror)
   (global-set-key (kbd "C-x /")  'helm-projectile))
