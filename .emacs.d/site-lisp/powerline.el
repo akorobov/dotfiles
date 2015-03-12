@@ -46,18 +46,18 @@
   (let* ((leftp (eq 'left direction))
          (fg (if leftp color1 color2))
          (bg (if leftp color2 color1)))
-    (create-image
-     (format "/* XPM */
+    (when window-system (create-image
+      (format "/* XPM */
 static char * arrow_left[] = {
 \"%d %d 2 1\",
 \". c %s\",
 \"  c %s\",
 %s};"
-             width height
-             (if fg fg "None")
-             (if bg bg "None")
-             (get-arrow-dots leftp width height))
-     'xpm t :ascent 'center)))
+              width height
+              (if fg fg "None")
+              (if bg bg "None")
+              (get-arrow-dots leftp width height))
+      'xpm t :ascent 'center))))
 
 (defun mode-line-height ()
   "The mode line height with its current font face."
@@ -85,8 +85,9 @@ static char * arrow_left[] = {
 (defun curve-right-xpm
   (color1 color2)
   "Return an XPM right curve string representing."
-  (create-image
-   (format "/* XPM */
+  (when window-system
+    (create-image
+     (format "/* XPM */
 static char * curve_right[] = {
 \"12 18 2 1\",
 \". c %s\",
@@ -109,15 +110,16 @@ static char * curve_right[] = {
 \"         ...\",
 \"         ...\",
 \"           .\"};"
-           (if color2 color2 "None")
-           (if color1 color1 "None"))
-   'xpm t :ascent 'center))
+             (if color2 color2 "None")
+             (if color1 color1 "None"))
+     'xpm t :ascent 'center)))
 
 (defun curve-left-xpm
   (color1 color2)
   "Return an XPM left curve string representing."
-  (create-image
-   (format "/* XPM */
+  (when window-system
+    (create-image
+     (format "/* XPM */
 static char * curve_left[] = {
 \"12 18 2 1\",
 \". c %s\",
@@ -140,44 +142,45 @@ static char * curve_left[] = {
 \"...         \",
 \"...         \",
 \".           \"};"
-           (if color1 color1 "None")
-           (if color2 color2 "None"))
-   'xpm t :ascent 'center))
+             (if color1 color1 "None")
+             (if color2 color2 "None"))
+     'xpm t :ascent 'center)))
 
 (defun make-xpm
   (name color1 color2 data)
   "Return an XPM image for lol data"
-  (create-image
-   (concat
-    (format "/* XPM */
+  (when window-system
+    (create-image
+     (concat
+      (format "/* XPM */
 static char * %s[] = {
 \"%i %i 2 1\",
 \". c %s\",
 \"  c %s\",
 "
-            (downcase (replace-regexp-in-string " " "_" name))
-            (length (car data))
-            (length data)
-            (if color1 color1 "None")
-            (if color2 color2 "None"))
-    (let ((len  (length data))
-          (idx  0))
-      (apply 'concat
-             (mapcar #'(lambda (dl)
-                        (setq idx (+ idx 1))
-                        (concat
-                         "\""
-                         (concat
-                          (mapcar #'(lambda (d)
-                                     (if (eq d 0)
-                                         (string-to-char " ")
-                                       (string-to-char ".")))
-                                  dl))
-                         (if (eq idx len)
-                             "\"};"
-                           "\",\n")))
-                     data))))
-   'xpm t :ascent 'center))
+              (downcase (replace-regexp-in-string " " "_" name))
+              (length (car data))
+              (length data)
+              (if color1 color1 "None")
+              (if color2 color2 "None"))
+      (let ((len  (length data))
+            (idx  0))
+        (apply 'concat
+               (mapcar #'(lambda (dl)
+                           (setq idx (+ idx 1))
+                           (concat
+                            "\""
+                            (concat
+                             (mapcar #'(lambda (d)
+                                         (if (eq d 0)
+                                             (string-to-char " ")
+                                           (string-to-char ".")))
+                                     dl))
+                            (if (eq idx len)
+                                "\"};"
+                              "\",\n")))
+                       data))))
+     'xpm t :ascent 'center)))
 
 (defun half-xpm
   (color1 color2)
@@ -337,7 +340,7 @@ install the memoized function over the original function."
 
 ;; get-scroll-bar-mode is not available in emacs 23.2
 (if (not (functionp 'get-scroll-bar-mode))
-    (defun get-scroll-bar-mode () scroll-bar-mode))
+    (defun get-scroll-bar-mode () (when window-system (scroll-bar-mode))))
 
 (defun powerline-make-fill
   (color)
