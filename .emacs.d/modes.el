@@ -105,6 +105,7 @@
                       eshell-mode
                       slime-repl-mode
                       clojure-mode
+                      cider-repl-mode
                       common-lisp-mode
                       )
        ;; disable ', it's the quote character!
@@ -113,16 +114,21 @@
        ;; also only use the pseudo-quote inside strings where it serve as
        ;; hyperlink.
        (sp-local-pair "`" "'" :when '(sp-in-string-p)))
+
+     ;; key bindings
+     (message "setting sp keymap")
+     (define-key sp-keymap (kbd "C-<right>") 'sp-forward-slurp-sexp)
+     (define-key sp-keymap (kbd "C-<left>") 'sp-forward-barf-sexp)
+     (define-key sp-keymap (kbd "M-t") 'sp-transpose-sexp)
+     (define-key sp-keymap (kbd "M-S-<left>") 'sp-backward-sexp)
+     (define-key sp-keymap (kbd "M-S-<right>") 'sp-forward-sexp)
+     (define-key sp-keymap (kbd "<delete>") 'sp-delete-char)
+     (define-key sp-keymap (kbd "M-s") 'sp-unwrap-sexp)
      ))
 
 
-(setq c-default-style "k&r"
-      c-basic-offset 4)
-
-(setq cperl-continued-statement-offset 0
-      cperl-indent-level 4
-      cperl-indent-parens-as-block t
-      cperl-close-paren-offset -4 )
+;; (setq c-default-style "k&r"
+;;       c-basic-offset 4)
 
 ;; to switch between single-line and multi-line comments
 (defun ak/use-cpp-comments ()
