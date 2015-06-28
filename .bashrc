@@ -38,4 +38,12 @@ yday () {
   perl -e "\$a=(localtime($1))[7];print\"\$a\n\"" 
 }
 
+function make-cp () {
+    cp=$(for i in $@; do
+             [ -d $i ] &&
+                 { jars=$(echo $i/*jar); [ "$i/*jar" != "$jars" ] && echo $jars || echo $i;} || echo $i;
+         done);
+    echo $cp | tr ' ' ':';
+}
+
 [[ -r ~/.bashrc.local ]] && . ~/.bashrc.local
