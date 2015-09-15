@@ -40,7 +40,11 @@
     go-mode
     company-go
     helm
-    paredit
+    irony
+    flycheck-irony
+    irony-eldoc
+    company-irony
+    company-irony-c-headers
     ggtags)
   "my packages")
 

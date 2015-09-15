@@ -51,11 +51,7 @@
 
 (global-set-key [help] 'info)
 (global-set-key [f1] 'manual-entry)
-(global-set-key [f2] 'save-buffer)
-(global-set-key [f3] 'find-file-at-point)
-(global-set-key [(shift f3)] 'revert-buffer)
 
-(global-set-key [(control o)] 'other-window)
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "M-3") 'split-window-horizontally)
 (global-set-key (kbd "M-2") 'split-window-vertically)
@@ -68,15 +64,9 @@
 (global-set-key (kbd "C-c <down>")  'windmove-down)
 
 (global-set-key [(meta j)] 'goto-line)
-(global-set-key [(meta g)] 'grep)
-(global-set-key [(meta q)] 'kill-buffer)
 (global-set-key [(meta \`)] 'ibuffer) ; buffer-menu
 (global-set-key [(meta backspace)] 'backward-kill-word)
 
-(global-set-key [(control c) (control a)] 'beginning-of-buffer)
-(global-set-key [(control c) (control e)] 'end-of-buffer)
-(global-set-key [(control c) (a)] 'beginning-of-buffer)
-(global-set-key [(control c) (e)] 'end-of-buffer)
 (global-set-key [(control c) (control q)] 'diff-apply-hunk)
 
 (global-set-key (kbd "<select>") 'end-of-line)
@@ -91,18 +81,12 @@
   (shell-command-on-region (region-beginning) (region-end) command (current-buffer) t))
 (global-set-key [(control |)] 'shell-filter-region)
 
-;; (global-set-key [(control i)]
-;;   '(lambda ()
-;;      (interactive)
-;;      (shell-command (read-string "Shell command to insert: ") t)))
-
 (defun my-match-paren (arg)
   "Go to the matching parenthesis if on parenthesis otherwise insert %."
   (interactive "p")
   (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
         ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
         (t (self-insert-command ()))))
-;        (t (self-insert-command (or arg 1)))))
 
 (global-set-key [(meta \\)] 'my-match-paren)       ; Bounce across parens, like in vi.
 
@@ -158,7 +142,6 @@
      (buffer-string) "\n" t)
     ))
 
-;;
 (defun goto-match-paren (arg)
   "Go to the matching parenthesis if on parenthesis. Else go to the
    opening parenthesis one level up."

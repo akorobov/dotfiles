@@ -1,5 +1,3 @@
-;; configure various modes
-
 (eval-after-load 'projectile
   '(progn
      (setq projectile-cache-project t)))
@@ -92,8 +90,8 @@
 (when (require 'helm-projectile nil 'noerror)
   (global-set-key (kbd "C-x /")  'helm-projectile))
 
-(eval-after-load 'smartparens
-  '(progn
+(when (require 'smartparens nil 'noerror)
+  (progn
      (setq sp-highlight-pair-overlay nil)
      ;; do not autoinsert ' pair if the point is preceeded by word.
      (sp-pair "'" nil :unless '(sp-point-after-word-p))
@@ -116,7 +114,6 @@
        (sp-local-pair "`" "'" :when '(sp-in-string-p)))
 
      ;; key bindings
-     (message "setting sp keymap")
      (define-key sp-keymap (kbd "C-<right>") 'sp-forward-slurp-sexp)
      (define-key sp-keymap (kbd "C-<left>") 'sp-forward-barf-sexp)
      (define-key sp-keymap (kbd "M-t") 'sp-transpose-sexp)
@@ -140,3 +137,32 @@
   (interactive)
   (setq-local comment-start "/*")
   (setq-local comment-end   "*/"))
+
+;; configure irony-more and flycheck-irony
+(defun use-irony-hook ()
+  (progn
+    ;; additional clang option to enable warnings on unused variables
+    (irony-mode)
+    ;; use flycheck-irony
+    (flycheck-select-checker 'irony)
+    ))
+
+(when (require 'irony nil 'noerror)
+  (progn
+    (eval-after-load 'company
+      '(add-to-list 'company-backends '(company-irony-c-headers company-irony)))
+    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+    
+    (setq irony-additional-clang-options '("-Wall"))
+    (eval-after-load 'flycheck
+      '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+    (flycheck-irony-setup)
+    ))
+
+(defun enable-irony ()
+  (add-hook 'c++-mode-hook 'use-irony-hook)
+  (add-hook 'c-mode-hook 'use-irony-hook))
+
+(defun disable-irony ()
+  (remove-hook 'c++-mode-hook 'use-irony-hook)
+  (remove-hook 'c-mode-hook 'use-irony-hook))
