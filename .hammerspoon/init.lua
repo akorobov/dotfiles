@@ -32,7 +32,7 @@ hotkey.bind(mashshift, 'J', function() window.focusedWindow():focusWindowSouth()
 hotkey.bind(mash, 'M', grid.maximizeWindow)
 
 hotkey.bind(mash, 'N', grid.pushWindowNextScreen)
-hotkey.bind(mash, 'P', grid.pushindowPrevScreen)
+hotkey.bind(mash, 'P', grid.pushWindowPrevScreen)
 
 hotkey.bind(mash, 'J', grid.pushWindowDown)
 hotkey.bind(mash, 'K', grid.pushWindowUp)
