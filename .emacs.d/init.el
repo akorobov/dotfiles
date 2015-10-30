@@ -22,24 +22,26 @@
 (package-initialize)
 
 ;; elpa/package archives
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.org/packages/")))
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
 
 (defvar my-packages
   '(company
     flycheck
     projectile
     smartparens
+    yasnippet
+    helm
     erlang
     haskell-mode
     clojure-mode
+    scala-mode
     cider
     web-mode
-    yasnippet
     go-mode
+    go-eldoc
     company-go
-    helm
     irony
     flycheck-irony
     irony-eldoc
