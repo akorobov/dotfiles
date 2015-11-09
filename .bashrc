@@ -23,19 +23,16 @@ alias gst='git stash'
     LESSKEY="$HOME/.lesskey"
 }
 
-# make sure we have brakes
-#stty erase ^h intr ^c susp ^z
-
-ct () { 
-  perl -e "print scalar localtime($1),\"\n\"" 
+ct () {
+    perl -e "print scalar localtime($1),\"\n\""
 }
 
 gmt () {
-  perl -e "print scalar gmtime($1),\"\n\"" 
+    perl -e "print scalar gmtime($1),\"\n\""
 }
 
-yday () { 
-  perl -e "\$a=(localtime($1))[7];print\"\$a\n\"" 
+yday () {
+    perl -e "\$a=(localtime($1))[7];print\"\$a\n\""
 }
 
 function make-cp () {

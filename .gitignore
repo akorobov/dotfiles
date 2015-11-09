@@ -3,3 +3,7 @@ vagrant/dist-files/**
 **/.vagrant/**
 .#*
 **/*~
+.emacs.d/recentf
+.emacs.d/irony
+.emacs.d/ensime
+**/*.elc
