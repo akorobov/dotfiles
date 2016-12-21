@@ -6,4 +6,6 @@ vagrant/dist-files/**
 .emacs.d/recentf
 .emacs.d/irony
 .emacs.d/ensime
+.emacs.d/bin
+.emacs.d/custom.el
 **/*.elc

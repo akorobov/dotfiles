@@ -12,11 +12,12 @@ shopt -s histappend
 export EDITOR=vi
 alias gl='git log --abbrev-commit'
 alias glt='git log --graph --full-history --pretty=format:"%h%x09%d%x20%s"'
-alias glta='git log --graph --full-history  --pretty=format:"%h%x09%cr%x09%cn%x09%d%x20%s"'
+alias glta='git log --graph --full-history --pretty=format:"%h%x09%cr%x09%<(20,trunc)%an%x09%s"'
 alias gs='git status'
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gst='git stash'
+alias gpr="git pull -r"
 
 [ -f "$HOME/.lesspipe.sh" ] && {
     LESSOPEN="|$HOME/.lesspipe.sh %s"
@@ -42,5 +43,9 @@ function make-cp () {
          done);
     echo $cp | tr ' ' ':';
 }
+
+if [[ -f ~/.pythonrc ]]; then
+	export PYTHONSTARTUP=~/.pythonrc
+fi
 
 [[ -r ~/.bashrc.local ]] && . ~/.bashrc.local
