@@ -42,6 +42,8 @@
 (setq-default indent-tabs-mode nil
               tab-width 4)
 
+(setq ring-bell-function 'ignore)
+
 ;; don't get lost
 (show-paren-mode t)
 
@@ -98,7 +100,9 @@
 (use-package ace-window
   :ensure t :defer t
   ;; relies on terminal sending [27;5;39~ escape sequence for C-'
-  :bind (("C-'" . ace-window)))
+  :bind (("C-'" . ace-window)
+         ("M-=" . ace-window))
+  :config (setq aw-scope 'frame))
 
 (use-package simple
   :bind (("M-j" . goto-line)
@@ -178,6 +182,9 @@
   :ensure t :defer t
   :bind ("C-c /" . pt-regexp))
 
+(use-package term
+  :config (define-key term-raw-map (kbd "C-c C-y") 'term-paste))
+
 (use-package company
   :ensure t
   :config (progn
@@ -185,6 +192,7 @@
                   company-minimum-prefix-length 1
                   company-idle-delay .25
                   company-echo-delay 0
+                  company-show-numbers t
                   ;; do not convert to lower case dabbrev candidates
                   company-dabbrev-downcase nil
                   company-begin-commands '(self-insert-command))
@@ -213,6 +221,7 @@
   :bind ([(control c) (control q)] . diff-apply-hunk)
   :config (setq diff-default-read-only t))
 
+(use-package eldoc)
 
 (use-package flycheck
   :ensure t :defer t
@@ -223,8 +232,11 @@
 
 ;; golang
 (use-package go-mode
-  :ensure t :defer t)
-
+  :ensure t :defer t
+  :bind ("C-c C-g d" . godoc-at-point)
+  :bind ("M-." . godef-jump)
+  :bind ("M-*" . pop-tag-mark)
+  :config (add-hook 'before-save-hook 'gofmt-before-save))
 
 (use-package company-go
   :ensure t :defer t
@@ -233,13 +245,34 @@
 
 (use-package go-eldoc
   :ensure t :defer t
-  :config (add-hook 'go-mode-hook #'go-eldoc-setup))
+  :init (add-hook 'go-mode-hook #'go-eldoc-setup))
 
-(let* ((go-path (getenv "GOPATH"))
-       (oracle-cmd-path (concat go-path "/src/golang.org/x/tools/cmd/oracle")))
-  (when (file-directory-p oracle-cmd-path)
-    (with-eval-after-load 'go-mode
-      (load-file (concat oracle-cmd-path "/oracle.el")))))
+(use-package go-guru
+  :ensure t :defer t)
+
+(use-package go-errcheck
+  :ensure t :defer t)
+
+;; rust
+(use-package rust-mode
+    :ensure t :defer t)
+
+(use-package flycheck-rust
+  :ensure t :defer t
+  :init (with-eval-after-load 'flycheck
+          (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
+
+(use-package racer
+  :ensure t :defer t
+  :config (setq
+           racer-cmd "~/.cargo/bin/racer"
+           racer-rust-src-path (getenv "RUST_SRC_PATH"))
+  :init (with-eval-after-load 'rust-mode
+          (add-hook 'rust-mode-hook #'racer-mode))
+  :init (add-hook 'racer-mode-hook #'eldoc-mode)
+  :init (with-eval-after-load 'company
+          (add-hook 'racer-mode-hook #'company-mode)))
+
 
 ;; haskell
 (use-package haskell-mode
@@ -366,8 +399,14 @@
 (use-package flatui-theme :ensure t :defer t)
 (use-package subatomic-theme :ensure t :defer t)
 
+(use-package spacemacs-theme
+  :ensure t
+  :defer t
+  :init (setq spacemacs-theme-comment-bg nil))
+
 (use-package mono-dark-theme
   :defer t :load-path "lisp/themes/")
+
 (use-package mono-light-theme
   :load-path "lisp/themes/"
   :init (load-theme 'mono-light 'no-confirm))

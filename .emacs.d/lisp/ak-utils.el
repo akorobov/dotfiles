@@ -19,8 +19,7 @@
   (with-temp-buffer
     (insert-file-contents file)
     (split-string
-     (buffer-string) "\n" t)
-    ))
+     (buffer-string) "\n" t)))
 
 (defun goto-match-paren (arg)
   "Go to the matching parenthesis if on parenthesis. Else go to the
@@ -40,7 +39,6 @@
                          (backward-list 1)
                          (backward-char 1)))
                   ))))))
-(global-set-key (kbd "M-\\") 'goto-match-paren)
 
 ;; protect Messages and scratch buffers
 (add-hook 'kill-buffer-query-functions
@@ -55,5 +53,20 @@
   (shell-command-on-region (region-beginning) (region-end) command (current-buffer) t))
 
 
+;; stackoverflow http://stackoverflow.com/questions/12492/pretty-printing-xml-files-on-emacs
+(defun pretty-print-xml-region (begin end)
+  "Pretty format XML markup in region between BEGIN to END positions.
+The function inserts linebreaks to separate tags that have
+nothing but wh2itespace between them.   It then indents the markup
+by using nxml's indentation rules."
+  (interactive "r")
+  (save-excursion
+    (nxml-mode)
+    (goto-char begin)
+    (while (search-forward-regexp "\>[ \\t]*\<" nil t)
+      (backward-char) (insert "\n"))
+    (indent-region begin end)))
+
+
 (provide 'ak-utils)
-;;; ak-utils.el ends here 
+;;; ak-utils.el ends here

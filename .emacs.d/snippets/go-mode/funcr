@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Func
+# key: Func
+# --
+// $1 ${6:...}
+func ${2:(receiver)} ${1:name }(${4:args}) $5 {
+  $0
+}

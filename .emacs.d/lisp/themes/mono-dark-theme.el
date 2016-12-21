@@ -9,12 +9,12 @@
 (deftheme mono-dark
   "Dark monochrome theme")
 
-(let ((class '((class color) (min-colors 10)))
+(let ((class `((class color) (min-colors 10)))
       (white "#F4F4F4")
       (lgray "#BFBFBF")
       (mgray "#8B8B8B")
       (dgray "#59595A")
-      (black "#484848")
+      (black "#404357") ;; "#484848"
 
       (orange "#FF9912")
       (red  "#ff2600")
@@ -122,8 +122,8 @@
    `(company-scrollbar-bg ((,class (:background ,dgray))))
 
    ;; flycheck
-   `(flycheck-error-face ((t (:foreground ,red :weight bold :underline t))))
-   `(flycheck-warning-face ((t (:foreground ,orange :weight bold :underline t :background nil))))
+   ;; `(flycheck-error-face ((t (:foreground ,red :weight bold :underline t))))
+   ;; `(flycheck-warning-face ((t (:foreground ,orange :weight bold :underline t :background nil))))
    )
 
   (custom-theme-set-variables

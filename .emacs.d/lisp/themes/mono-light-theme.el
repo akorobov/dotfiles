@@ -17,7 +17,7 @@
       (black "#282828")
 
       (orange "#FF9912")
-      (green  "##00f900")
+      (green  "#00f900")
       (red    "#E82C0C")
       (dgreen "#008700"))
 
@@ -50,6 +50,7 @@
     `(error ((t (:background nil :weight bold :foreground ,red))))
     `(warning ((t (:background nil :foreground ,orange))))
     `(success ((t (:inherit default :foreground ,green))))
+    `(info ((t (:inherit default :foreground ,green :underline t))))
 
    ;; Font lock faces
    `(font-lock-builtin-face ((t (:foreground ,black))))
