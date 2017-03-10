@@ -74,6 +74,8 @@
 ;; color themes
 (add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/themes")
 
+(setq gnutls-min-prime-bits 1024)
+
 (use-package ido
   :init (ido-mode t)
   :config (progn
@@ -355,17 +357,55 @@
           (add-hook 'flycheck-mode-hook #'ak-flycheck-python-setup)))
 
 ;; web
-(use-package web-mode
-  :ensure t :defer t
-  :config  (setq web-mode-markup-indent-offset 2))
+(use-package json-mode
+  :init (setq js-indent-level 2))
 
 (use-package js2-mode
+  :diminish js2-minor-mode
+  :commands (js2-mode js2-minor-mode)
+  :mode ("\\.js\\'" . js-mode)
+  :mode ("\\.ts\\'" . js-mode)
+  :interpreter ("node" . js-mode)
+  :init
+  (add-hook 'js-mode-hook 'js2-minor-mode)
+  (add-hook 'js2-mode-hook #'js2-highlight-unused-variables-mode)
+  (setq js2-highlight-level 3
+        js2-mode-assume-strict t
+        js2-mode-show-parse-errors nil
+        js2-mode-show-strict-warnings nil
+        js2-strict-trailing-comma-warning nil)
+
+  (use-package tern
+    :diminish " T"
+    :commands (tern-mode)
+    :init
+    (add-hook 'js-mode-hook 'tern-mode))
+
+  (use-package company-tern
+    :config
+    (add-to-list 'company-backends 'company-tern))
+
+  (use-package js-doc)
+
+  (use-package js2-refactor
+    :diminish js2-refactor-mode
+    :init
+    (add-hook 'js2-mode-hook #'js2-refactor-mode)
+    ;; :config
+    ;; (js2r-add-keybindings-with-prefix "C-c r")
+    )
+  )
+
+(use-package web-mode
   :ensure t :defer t
-  :mode "\\.js\\'"
-  :config (progn
-            (setq-default js2-basic-offset 2)
-                 (add-hook 'js2-mode-hook
-                           #'js2-highlight-unused-variables-mode)))
+  :mode (("\\.html?\\'" . web-mode)
+         ("\\.ejs\\'" . web-mode))
+  :init
+  (setq web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2
+        web-mode-style-padding 2
+        web-mode-script-padding 2))
 
 (use-package emmet-mode
   :ensure t :defer t)
@@ -378,16 +418,18 @@
   :ensure t :defer t
   :bind ("C-c m" . mc/mark-all-like-this-dwim))
 
-;; utils
-(use-package powerline
-  :load-path "lisp/")
+(use-package powerline :ensure t
+     :config
+     (setq-default ns-use-srgb-colorspace nil
+                   powerline-default-separator 'utf-8)
+     :commands (powerline-default-theme))
 
 (use-package ak-utils
   :load-path "lisp/"
   :bind ("M-\\" . goto-match-paren)
   :bind ([(control \|)] . shell-filter-region))
 
-;; decorations
+;; reset theme on change
 (defadvice load-theme (before theme-dont-propagate activate)
   "Disable all custom themes before loading new one."
   (mapcar #'disable-theme custom-enabled-themes))

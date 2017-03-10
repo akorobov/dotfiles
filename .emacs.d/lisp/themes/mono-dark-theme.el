@@ -37,15 +37,14 @@
    `(lazy-highlight ((,class (:foreground ,dgray :background ,lgray))))
    `(trailing-whitespace ((,class (:background ,red))))
 
-   ;; Mode line faces
    `(minibuffer-prompt ((t (:foreground ,orange))))
-   `(mode-line-buffer-id ((t (:foreground ,white :weight bold))))
-   `(mode-line ((,class (:box (:line-width -1 :style released-button)
-                              :background ,mgray :foreground ,white))))
-   `(mode-line-inactive ((,class (:box (:line-width -1 :style released-button)
-                                       :background ,black
-                                       :foreground ,lgray))))
 
+   ;; powerline faces
+   `(powerline-active1 ((t :background ,dgray :foreground ,lgray :weight bold)))
+   `(powerline-active2 ((t :background ,dgray :foreground ,lgray)))
+   `(powerline-inactive1 ((t :background ,dgray :foreground ,lgray)))
+   `(powerline-inactive2 ((t :background ,dgray :foreground ,lgray)))
+   
    ;; Escape and prompt faces
     `(minibuffer-prompt ((,class (:weight bold :foreground ,orange))))
     `(escape-glyph ((,class (:foreground ,dgray))))

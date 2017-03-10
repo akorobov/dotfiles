@@ -36,21 +36,19 @@
    `(lazy-highlight ((t (:foreground ,white :background ,dgray))))
    `(trailing-whitespace ((t (:background ,red))))
 
-   ;; Mode line faces
-   `(mode-line-buffer-id ((t (:foreground ,black :weight bold))))
-   `(mode-line ((t (:box (:line-width -1 :style released-button)
-                              :background ,lgray :foreground ,dgray))))
-   `(mode-line-inactive ((t (:box (:line-width -1 :style released-button)
-                                       :background ,white
-                                       :foreground ,black))))
-
+   ;; powerline faces
+   `(powerline-active1 ((t :background ,dgray :foreground ,lgray :weight bold)))
+   `(powerline-active2 ((t :background ,dgray :foreground ,lgray)))
+   `(powerline-inactive1 ((t :background ,dgray :foreground ,lgray)))
+   `(powerline-inactive2 ((t :background ,dgray :foreground ,lgray)))
+  
    ;; Escape and prompt faces
-    `(minibuffer-prompt ((t (:weight bold :foreground ,dgray))))
-    `(escape-glyph ((t (:foreground ,dgray))))
-    `(error ((t (:background nil :weight bold :foreground ,red))))
-    `(warning ((t (:background nil :foreground ,orange))))
-    `(success ((t (:inherit default :foreground ,green))))
-    `(info ((t (:inherit default :foreground ,green :underline t))))
+   `(minibuffer-prompt ((t (:weight bold :foreground ,dgray))))
+   `(escape-glyph ((t (:foreground ,dgray))))
+   `(error ((t (:background nil :weight bold :foreground ,red))))
+   `(warning ((t (:background nil :foreground ,orange))))
+   `(success ((t (:inherit default :foreground ,green))))
+   `(info ((t (:inherit default :foreground ,green :underline t))))
 
    ;; Font lock faces
    `(font-lock-builtin-face ((t (:foreground ,black))))
