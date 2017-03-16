@@ -40,10 +40,10 @@
    `(minibuffer-prompt ((t (:foreground ,orange))))
 
    ;; powerline faces
-   `(powerline-active1 ((t :background ,dgray :foreground ,lgray :weight bold)))
-   `(powerline-active2 ((t :background ,dgray :foreground ,lgray)))
-   `(powerline-inactive1 ((t :background ,dgray :foreground ,lgray)))
-   `(powerline-inactive2 ((t :background ,dgray :foreground ,lgray)))
+   `(powerline-active1 ((t :background ,mgray :inherit mode-line)))
+   `(powerline-active2 ((t :background ,mgray :inherit mode-line)))
+   `(powerline-inactive1 ((t :background ,dgray :inherit mode-line-inactive)))
+   `(powerline-inactive2 ((t :background ,dgray :inherit mode-line-inactive)))
    
    ;; Escape and prompt faces
     `(minibuffer-prompt ((,class (:weight bold :foreground ,orange))))

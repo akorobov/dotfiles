@@ -71,6 +71,7 @@
   :config
   (setq custom-file (locate-user-emacs-file "custom.el")))
 
+(use-package which-key :ensure t :defer t)
 ;; color themes
 (add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/themes")
 
@@ -356,6 +357,9 @@
           (add-hook 'python-mode-hook #'ak-python-venv-setup)
           (add-hook 'flycheck-mode-hook #'ak-flycheck-python-setup)))
 
+;; yang models
+(use-package yang-mode :ensure t :defer t)
+
 ;; web
 (use-package json-mode
   :init (setq js-indent-level 2))
@@ -422,7 +426,7 @@
      :config
      (setq-default ns-use-srgb-colorspace nil
                    powerline-default-separator 'utf-8)
-     :commands (powerline-default-theme))
+     :init (powerline-default-theme))
 
 (use-package ak-utils
   :load-path "lisp/"
@@ -432,25 +436,21 @@
 ;; reset theme on change
 (defadvice load-theme (before theme-dont-propagate activate)
   "Disable all custom themes before loading new one."
-  (mapcar #'disable-theme custom-enabled-themes))
+  (dolist (i custom-enabled-themes)
+    (disable-theme i)))
 
+;; themes
 (use-package custom
   :init (add-to-list 'custom-theme-load-path "~/.emacs.d/lisp/themes"))
 
 (use-package zenburn-theme :ensure t :defer t)
 (use-package flatui-theme :ensure t :defer t)
 (use-package subatomic-theme :ensure t :defer t)
+(use-package mono-dark-theme :defer t)
+(use-package mono-light-theme :defer t)
 
-(use-package spacemacs-theme
-  :ensure t
-  :defer t
+(use-package spacemacs-theme :ensure t :defer t
   :init (setq spacemacs-theme-comment-bg nil))
 
-(use-package mono-dark-theme
-  :defer t :load-path "lisp/themes/")
-
-(use-package mono-light-theme
-  :load-path "lisp/themes/"
-  :init (load-theme 'mono-light 'no-confirm))
 
 ;;; init.el ends here
