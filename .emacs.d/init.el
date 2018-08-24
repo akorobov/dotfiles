@@ -66,14 +66,9 @@
               delete-old-versions t)
   :bind (("C-c r" . revert-buffer)))
 
-(use-package cus-edit
-  :defer t
-  :config
-  (setq custom-file (locate-user-emacs-file "custom.el")))
-
 (use-package which-key :ensure t :defer t)
 ;; color themes
-(add-to-list 'custom-theme-load-path "~/.emacs.d/site-lisp/themes")
+(setq custom-theme-directory "~/.emacs.d/site-lisp/themes")
 
 (setq gnutls-min-prime-bits 1024)
 
@@ -113,7 +108,12 @@
 
 (use-package projectile
   :ensure t :defer t
-  :config (setq projectile-cache-project t))
+  :config (progn
+            (setq projectile-cache-project t)
+            (add-to-list 'projectile-project-root-files "compile_commands.json")
+            (add-to-list 'projectile-project-root-files "configure.ac")
+            (add-to-list 'projectile-project-root-files ".cquery")
+            (add-to-list 'projectile-project-root-files ".cquery.in")))
 
 (use-package ibuffer
   :config (setq ibuffer-expert t)
@@ -150,6 +150,7 @@
                              lisp-interaction-mode
                              scheme-mode
                              lisp-mode
+                             rust-mode
                              eshell-mode
                              slime-repl-mode
                              clojure-mode
@@ -191,7 +192,8 @@
 (use-package company
   :ensure t
   :config (progn
-            (setq company-tooltip-limit 20
+            (setq company-global-modes '(not fundamental-mode)
+                  company-tooltip-limit 20
                   company-minimum-prefix-length 1
                   company-idle-delay .25
                   company-echo-delay 0
@@ -210,14 +212,16 @@
                  (company-abort)
                  (if (fboundp 'evil-normal-state)
                      (evil-normal-state))))
-            (global-company-mode)))
+            (global-company-mode t)))
 
 (use-package company-quickhelp
   :ensure t :defer t
   :init (with-eval-after-load 'company
           (when (fboundp window-system) (company-quickhelp-mode))))
 
-(use-package yasnippet :ensure t :defer t)
+(use-package yasnippet :ensure t :defer t
+  :config
+  (add-hook 'prog-mode-hook #'yas-minor-mode))
 
 (use-package diff-mode
   :defer t
@@ -232,6 +236,20 @@
   :config (setq flycheck-highlighting-mode 'lines))
 
 ;;; languages support
+(use-package lsp-mode
+  :ensure t :defer t)
+
+(use-package lsp-ui
+  :ensure t
+  :config
+  :after lsp-mode
+  :hook (lsp-mode . lsp-ui-mode))
+
+(use-package company-lsp
+  :ensure t
+  :config
+  (setq company-lsp-enable-recompletion t)
+  (add-to-list 'company-backends 'company-lsp))
 
 ;; golang
 (use-package go-mode
@@ -258,24 +276,26 @@
 
 ;; rust
 (use-package rust-mode
-    :ensure t :defer t)
+  :ensure t
+  :mode ("\\.rs\\'" . rust-mode))
 
-(use-package flycheck-rust
-  :ensure t :defer t
-  :init (with-eval-after-load 'flycheck
-          (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
+;; Rust
+(use-package rust-mode
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode)))
 
-(use-package racer
-  :ensure t :defer t
-  :config (setq
-           racer-cmd "~/.cargo/bin/racer"
-           racer-rust-src-path (getenv "RUST_SRC_PATH"))
-  :init (with-eval-after-load 'rust-mode
-          (add-hook 'rust-mode-hook #'racer-mode))
-  :init (add-hook 'racer-mode-hook #'eldoc-mode)
-  :init (with-eval-after-load 'company
-          (add-hook 'racer-mode-hook #'company-mode)))
+(use-package lsp-rust
+  :ensure t
+  :init
+  (setq lsp-rust-rls-command '("rustup" "run" "nightly" "rls"))
+  (add-hook 'rust-mode-hook #'lsp-rust-enable)
+  (add-hook 'rust-mode-hook #'flycheck-mode))
 
+;; `toml' support for `cargo' files
+(use-package toml-mode
+  :ensure t
+  :mode ("\\.toml\\'" . toml-mode))
 
 ;; haskell
 (use-package haskell-mode
@@ -285,11 +305,10 @@
 
 (use-package erlang
   :ensure t :defer t
-  :config (progn
-            (setq erlang-node-name "emacs@localhost"
-                  erl-nodename-cache (intern erlang-node-name)
-                  inferior-erlang-machine-options
-                  (list "-name" erlang-node-name "-sname" erlang-node-name))))
+  :config (setq erlang-node-name "emacs@localhost"
+                erl-nodename-cache (intern erlang-node-name)
+                inferior-erlang-machine-options
+                (list "-name" erlang-node-name "-sname" erlang-node-name)))
 
 ;; clojure
 (use-package clojure-mode
@@ -299,32 +318,20 @@
   :defer t :ensure t)
 
 ;; c/c++
-(use-package irony
-  :defer t :ensure t
-  :config (progn
-            (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-            (setq irony-additional-clang-options '("-Wall"))
-            (add-hook 'c-mode-hook #'irony-mode)
-            (add-hook 'c++-mode-hook #'irony-mode)))
-
-(use-package irony-eldoc
+(use-package cquery
   :ensure t
-  :config (add-hook 'irony-mode-hook #'irony-eldoc))
+  :commands (lsp-cquery-enable)
+  :hook (c-mode-common . lsp-cquery-enable)
+ :config
+  ;; (add-hook 'c-mode-common-hook #'lsp-cquery-enable)
+  ;; (add-hook 'c++-mode-hook (lambda() (lsp-cquery-enable)))
+ (setq cquery-executable "/opt/cquery/bin/cquery")
+ ;;(setq cquery-extra-init-params '(:completion (:detailedLabel t)))
+ )
 
-(use-package company-irony
-  :defer t :ensure t
-  :init (with-eval-after-load 'company
-          (add-to-list 'company-backends 'company-irony)))
-
-(use-package company-irony-c-headers
-  :defer t :ensure t
-  :init (with-eval-after-load 'company
-          (add-to-list 'company-backends 'company-irony-c-headers)))
-
-(use-package flycheck-irony
-  :defer t
+(use-package flycheck
   :ensure t
-  :init (with-eval-after-load 'flycheck (add-hook 'flycheck-mode-hook #'flycheck-irony-setup)))
+  :config (global-flycheck-mode))
 
 ;; python
 (use-package python
@@ -361,7 +368,7 @@
 (use-package yang-mode :ensure t :defer t)
 
 ;; web
-(use-package json-mode
+(use-package json-mode :ensure t :defer t
   :init (setq js-indent-level 2))
 
 (use-package js2-mode
@@ -380,18 +387,22 @@
         js2-strict-trailing-comma-warning nil)
 
   (use-package tern
+    :ensure t :defer t
     :diminish " T"
     :commands (tern-mode)
     :init
     (add-hook 'js-mode-hook 'tern-mode))
 
   (use-package company-tern
+    :ensure t
     :config
     (add-to-list 'company-backends 'company-tern))
 
-  (use-package js-doc)
+  (use-package js-doc :ensure t :defer t
+)
 
   (use-package js2-refactor
+    :ensure t :defer t
     :diminish js2-refactor-mode
     :init
     (add-hook 'js2-mode-hook #'js2-refactor-mode)
@@ -448,6 +459,7 @@
 (use-package subatomic-theme :ensure t :defer t)
 (use-package mono-dark-theme :defer t)
 (use-package mono-light-theme :defer t)
+(use-package green-phosphor-theme :defer t)
 
 (use-package spacemacs-theme :ensure t :defer t
   :init (setq spacemacs-theme-comment-bg nil))

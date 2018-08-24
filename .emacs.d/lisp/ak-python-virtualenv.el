@@ -1,4 +1,7 @@
-;;; 
+;;; init.el --- emacs configuration -*- lexical-binding: t; -*-
+;;; Commentary:
+
+;;; Code:
 
 (require 'projectile)
 (require 'python)
@@ -27,3 +30,4 @@
       (setq-local python-shell-virtualenv-path venv-dir))))
 
 (provide 'ak-python-virtualenv)
+;;; ak-python-virtualenv.el ends here
