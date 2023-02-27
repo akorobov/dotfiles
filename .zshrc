@@ -1,5 +1,5 @@
 export HISTSIZE=2000
-export HISTFILE="${HOME}/.bash_history"
+export HISTFILE="${HOME}/.zsh_history"
 
 # aliases
 export EDITOR=vi
@@ -18,6 +18,8 @@ alias git-describe-branches='for line in $(git branch); do
        echo "$line     $description"
      fi
 done'
+
+export KUBECONFIG=$(echo ~/.kube/*yaml | tr ' ' ':')
 
 ct () {
     perl -e "print scalar localtime($1),\"\n\""
@@ -45,9 +47,16 @@ if [[ -f ~/.pythonrc ]]; then
 	export PYTHONSTARTUP=~/.pythonrc
 fi
 
+zstyle ':completion:*' completer _complete
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
+autoload -Uz compinit
+compinit
+set -o emacs
+
+export KUBECONFIG=$(echo ~/.kube/*.yaml | tr ' ' ':')
 export PROMPT='%1~%f ∀ '
 
 host=$(hostname -s)
-[[ -r ~/.bahrc.local ]] && . ~/.bashrc.local
-[[ -r ~/.bashrc.${host} ]] && . ~/.bashrc.${host}
+[[ -r ~/.zshrc.local ]] && . ~/.zshrc.local
+[[ -r ~/.zshrc.${host} ]] && . ~/.zshrc.${host}
 
