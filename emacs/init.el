@@ -117,23 +117,29 @@
 (use-package magit
   :ensure t :defer t)
 
-
 ;; completion
 (use-package corfu
   :ensure t
   :custom
   (corfu-auto t)
+  ;; (corfu-cycle t)
   :init
   (global-corfu-mode)
   :config
-  (setq corfu-auto-prefix 1)
-  (setq corfu-auto-delay 0.5))
+  (setq corfu-auto-prefix 2)
+  (setq corfu-auto-delay 0.5)
+  :bind (:map corfu-map
+              ("M-/" . corfu-next)
+              ("M-d" . #'corfu-info-documentation)
+         )
+  )
 
 (use-package orderless
   :ensure t
   :config
   (setq completion-styles '(orderless flex)
-        completion-category-overrides '((eglot (styles . (orderless flex))))))
+        completion-category-overrides '((eglot (styles . (orderless flex)))))
+  )
 
 (use-package vertico
   :ensure t
@@ -160,7 +166,6 @@
   (setq rg-show-columns t)
   :bind ("C-c /" . ripgrep-regexp))
 
-
 ;; lsp
 (setq ak/lsp-eglot t)
 (if ak/lsp-eglot
@@ -171,7 +176,13 @@
       (setq read-process-output-max (* 1024 1024))
       ;; non-blocking connects
       (setq eglot-sync-connect 0)
-      (push :documentHighlightProvider eglot-ignored-server-capabilities))
+      (push :documentHighlightProvider eglot-ignored-server-capabilities)
+      :bind (("C-c a" 'eglot-code-actions)
+             ("C-c r" 'eglot-rename)
+             ("C-c C-r" 'eglot-reconnect)
+             )
+      
+      )
 
   (use-package lsp-mode
     :ensure t
@@ -311,7 +322,7 @@
 (use-package frame
   :config
   (letrec ((font-name ak/default-font)
-           (font-size (if (> (display-pixel-width) 1920) 15 12))
+           (font-size (if (> (display-pixel-width) 1920) 12 12))
            (font (format "%s-%d" font-name font-size)))
     (set-frame-font font)
     (add-to-list 'default-frame-alist `(font . ,font))))
@@ -327,5 +338,5 @@
 ;; (use-package nord-theme
 ;;   :init (setq nord-comment-brightness 20))
 
-;; (use-package spacemacs-theme :ensure t :defer t
-;;   :init (setq spacemacs-theme-comment-bg nil))
+(use-package spacemacs-theme :ensure t :defer t
+  :init (setq spacemacs-theme-comment-bg nil))
