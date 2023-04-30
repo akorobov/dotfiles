@@ -122,7 +122,7 @@
   :ensure t
   :custom
   (corfu-auto t)
-  ;; (corfu-cycle t)
+  (corfu-cycle t)
   :init
   (global-corfu-mode)
   :config
@@ -141,6 +141,16 @@
         completion-category-overrides '((eglot (styles . (orderless flex)))))
   )
 
+;; corfu terminal support
+(use-package popon
+  :load-path "lisp/")
+
+(use-package corfu-terminal
+  :load-path "lisp/")
+  
+(use-package corfu-doc-terminal
+  :load-path "lisp/")
+  
 (use-package vertico
   :ensure t
   :init
@@ -177,12 +187,11 @@
       ;; non-blocking connects
       (setq eglot-sync-connect 0)
       (push :documentHighlightProvider eglot-ignored-server-capabilities)
-      :bind (("C-c a" 'eglot-code-actions)
-             ("C-c r" 'eglot-rename)
-             ("C-c C-r" 'eglot-reconnect)
-             )
-      
-      )
+      :bind (:map eglot-mode-map
+                  ("C-c a" . eglot-code-actions)
+                  ("C-c r" . eglot-rename)
+                  ("C-c C-r" . eglot-reconnect)
+                  ))
 
   (use-package lsp-mode
     :ensure t
@@ -338,5 +347,5 @@
 ;; (use-package nord-theme
 ;;   :init (setq nord-comment-brightness 20))
 
-(use-package spacemacs-theme :ensure t :defer t
+(use-package spacemacs-theme :ensure t
   :init (setq spacemacs-theme-comment-bg nil))
