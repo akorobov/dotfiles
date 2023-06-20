@@ -43,6 +43,7 @@ function make-cp () {
 
 function dux () { du -smx "$@" | sort -rn -k 1,1;  }
 
+function set-title () { echo -ne "\e]1;$*\a" }
 if [[ -f ~/.pythonrc ]]; then
 	export PYTHONSTARTUP=~/.pythonrc
 fi

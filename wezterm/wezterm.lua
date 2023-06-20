@@ -1,6 +1,18 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
 
+
+local hlink_rules = {}
+-- wezterm.default_hyperlink_rules()
+-- table.insert(hlink_rules, 1,
+--   {
+--     regex = '\\b\\w+@[\\w-]+(\\.[\\w-]+)+\\b',
+--     format = '$0',
+--     highlight = 1,
+--     -- format = 'mailto:$0',
+--   })
+
+
 return {
   -- color_scheme = 'ayu_light', 
   color_scheme = 'Material', 
@@ -26,7 +38,7 @@ return {
     { key = "=", mods = "SUPER", action = act.IncreaseFontSize },
     { key = "-", mods = "SUPER", action = act.DecreaseFontSize },
     { key = "r", mods = "SUPER", action = act.ReloadConfiguration },
-    { key = "p", mods = "SUPER", action = act.ActivateCommandPalette },
+    { key = "p", mods = "SUPER|SHIFT", action = act.ActivateCommandPalette },
     { key = "Enter", mods = "SUPER|SHIFT", action = act.ToggleFullScreen },
     { key = "1", mods = "SUPER", action = act.ActivateTab(0) },
     { key = "2", mods = "SUPER", action = act.ActivateTab(1) },
@@ -70,4 +82,40 @@ return {
   scrollback_lines = 10000,
   enable_scroll_bar = true,
   audible_bell = "Disabled",
+  hyperlink_rules = { 
+    -- Matches: a URL in parens: (URL)
+    {
+      regex = '\\((\\w+://\\S+)\\)',
+      format = '$1',
+      highlight = 1,
+    },
+    -- Matches: a URL in brackets: [URL]
+    {
+      regex = '\\[(\\w+://\\S+)\\]',
+      format = '$1',
+      highlight = 1,
+    },
+    -- Matches: a URL in curly braces: {URL}
+    {
+      regex = '\\{(\\w+://\\S+)\\}',
+      format = '$1',
+      highlight = 1,
+    },
+    -- Matches: a URL in angle brackets: <URL>
+    {
+      regex = '<(\\w+://\\S+)>',
+      format = '$1',
+      highlight = 1,
+    },
+    -- Then handle URLs not wrapped in brackets
+    {
+      regex = '\\b\\w+://\\S+[)/a-zA-Z0-9-]+',
+      format = '$0',
+    },
+ -- implicit mailto link
+    -- {
+    --   regex = '\\b\\w+@[\\w-]+(\\.[\\w-]+)+\\b',
+    --   format = 'mailto:$0',
+    -- },
+  },
 }

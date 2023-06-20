@@ -2,6 +2,7 @@ theme = "nord_light"
 
 [editor]
 line-number = "relative"
+mouse = false
 
 [editor.soft-wrap]
 enable = true
