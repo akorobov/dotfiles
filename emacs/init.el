@@ -101,11 +101,11 @@
 
 (use-package which-key :ensure t :defer t)
 
-(use-package powerline :ensure t
-     :config
-     (setq-default ns-use-srgb-colorspace nil
-                   powerline-default-separator 'utf-8)
-     :init (powerline-default-theme))
+;; (use-package powerline :ensure t
+;;      :config
+;;      (setq-default ns-use-srgb-colorspace nil
+;;                    powerline-default-separator 'utf-8)
+;;      :init (powerline-default-theme))
 
 (use-package emacs
  :init
@@ -146,9 +146,6 @@
   :load-path "lisp/")
 
 (use-package corfu-terminal
-  :load-path "lisp/")
-  
-(use-package corfu-doc-terminal
   :load-path "lisp/")
   
 (use-package vertico
@@ -256,12 +253,12 @@
 
 
 ;; misc
-(use-package powerline
-  :ensure t
-  :config
-  (setq-default ns-use-srgb-colorspace nil
-                powerline-default-separator 'utf-8)
-  :init (powerline-default-theme))
+;; (use-package powerline
+;;   :ensure t
+;;   :config
+;;   (setq-default ns-use-srgb-colorspace nil
+;;                 powerline-default-separator 'utf-8)
+;;   :init (powerline-default-theme))
 
 (use-package ak-utils
   :load-path "lisp/"
@@ -318,6 +315,13 @@
   :ensure t :defer t
   :bind ("C-c m" . mc/mark-all-like-this-dwim))
 
+
+;; (setq treesit-language-source-alist
+;;       '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+;;         (python "https://github.com/tree-sitter/tree-sitter-python")
+;;         (go "https://github.com/tree-sitter/tree-sitter-go")
+;;         ))
+
 ;; fonts
 
 (cond 
@@ -331,7 +335,7 @@
 (use-package frame
   :config
   (letrec ((font-name ak/default-font)
-           (font-size (if (> (display-pixel-width) 1920) 12 12))
+           (font-size (if (>= (display-pixel-width) 1920) 13 14))
            (font (format "%s-%d" font-name font-size)))
     (set-frame-font font)
     (add-to-list 'default-frame-alist `(font . ,font))))
