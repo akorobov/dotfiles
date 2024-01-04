@@ -1,6 +1,8 @@
 export HISTSIZE=2000
 export HISTFILE="${HOME}/.zsh_history"
 
+setopt inc_append_history
+
 # aliases
 export EDITOR=vi
 alias gl='git log --abbrev-commit'

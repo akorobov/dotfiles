@@ -22,8 +22,9 @@ return {
   -- color_scheme = 'Grayscale Light (base16)', 
   -- color_scheme = 'Green Screen (base16)', 
   font = wezterm.font_with_fallback {
-    {family = 'PragmataPro Mono Liga', weight = 'Regular'}, 
-    {family = 'Iosevka SS08', weight = 'Regular'}},
+    {family = 'PragmataPro Liga', weight = 'Regular'},
+    {family = 'Iosevka SS08', weight = 'Regular'}
+  },
   font_size = 12,
 
   check_for_updates = false,
