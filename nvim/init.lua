@@ -827,7 +827,9 @@ require("lazy").setup({
 		-- Enable `lukas-reineke/indent-blankline.nvim`
 		-- See `:help ibl`
 		main = "ibl",
-		opts = {},
+		opts = {
+      indent = { char = "⠅" }, --  ⠂⡇
+    },
 	},
 
 	-- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the

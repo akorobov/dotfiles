@@ -14,7 +14,7 @@ local hlink_rules = {}
 
 
 return {
-  -- color_scheme = 'ayu_light', 
+  --color_scheme = 'ayu_light', 
   color_scheme = 'Material', 
   -- color_scheme = 'catppuccin-latte', 
   -- color_scheme = 'zenbones', 
@@ -22,11 +22,10 @@ return {
   -- color_scheme = 'Grayscale Light (base16)', 
   -- color_scheme = 'Green Screen (base16)', 
   font = wezterm.font_with_fallback {
-    {family = 'PragmataPro Liga', weight = 'Regular'},
+    {family = 'PragmataPro Mono Liga', weight = 'Regular'},
     {family = 'Iosevka SS08', weight = 'Regular'}
   },
   font_size = 12,
-
   check_for_updates = false,
 
   disable_default_key_bindings = true,
@@ -72,6 +71,11 @@ return {
     { key = "DownArrow", mods = "SUPER", action = act.ActivatePaneDirection("Down") },
     { key = "UpArrow", mods = "SUPER", action = act.ActivatePaneDirection("Up") },
     { key = "RightArrow", mods = "SUPER", action = act.ActivatePaneDirection("Right") },
+    
+    { key = "h", mods = "SUPER|SHIFT", action = act.AdjustPaneSize{'Left', 1} },
+    { key = "l", mods = "SUPER|SHIFT", action = act.AdjustPaneSize{'Right', 1} },
+    { key = "j", mods = "SUPER|SHIFT", action = act.AdjustPaneSize{'Down', 1} },
+    { key = "k", mods = "SUPER|SHIFT", action = act.AdjustPaneSize{'Up', 1} },
   },
 
   -- kitty extended keyboard protocol

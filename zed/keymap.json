@@ -1,0 +1,8 @@
+[
+  {
+    "bindings": {
+      "cmd-\\": "editor::Hover",
+      "f1": "editor::Hover"
+    }
+  }
+]

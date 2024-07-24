@@ -21,7 +21,7 @@ alias git-describe-branches='for line in $(git branch); do
      fi
 done'
 
-export KUBECONFIG=$(echo ~/.kube/*yaml | tr ' ' ':')
+export KUBECONFIG=$(find ~/.kube/ -name \*yaml | xargs | tr ' ' ':')
 
 ct () {
     perl -e "print scalar localtime($1),\"\n\""
@@ -50,16 +50,15 @@ if [[ -f ~/.pythonrc ]]; then
 	export PYTHONSTARTUP=~/.pythonrc
 fi
 
-zstyle ':completion:*' completer _complete
-zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
-autoload -Uz compinit
-compinit
+#zstyle ':completion:*' completer _complete
+#zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
+#autoload -Uz compinit
+#compinit
 
 export WORDCHARS='*?.-[]~=&;!#$%^(){}<>'
 
 set -o emacs
 
-export KUBECONFIG=$(echo ~/.kube/*.yaml | tr ' ' ':')
 export PROMPT='%1~%f ∀ '
 
 host=$(hostname -s)
