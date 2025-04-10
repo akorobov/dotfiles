@@ -7,8 +7,20 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "features": {
+    "edit_prediction_provider": "zed"
+  },
+  "assistant": {
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-7-sonnet-latest"
+    },
+    "version": "2"
+  },
   "ui_font_size": 12,
-  "buffer_font_family": "Iosevka SS08",
+  "buffer_font_family": "PragmataPro Mono Liga",
+  // "buffer_font_family": "Iosevka SS08",
+  // "buffer_font_family": "Berkeley Mono",
   "buffer_font_size": 12,
   "telemetry": {
     "diagnostics": false,
@@ -17,5 +29,32 @@
   "theme": "One Light",
   "terminal": {
     "line_height": "standard"
+  },
+
+  "languages": {
+    "Python": {
+      "language_servers": ["pyright", "ruff", "!pylsp"]
+    }
   }
+  // // disable pylsp linting
+  // "lsp": {
+  //   "pylsp": {
+  //     "settings": {
+  //       "plugins": {
+  //         // "pylsp_mypy": {
+  //         //   "overrides": ["--python-executable", ".venv/bin/python", true]
+  //         // },
+  //         "pycodestyle": {
+  //           "enabled": false
+  //         },
+  //         "pyflakes": {
+  //           "enabled": false
+  //         },
+  //         "pylint": {
+  //           "enabled": false
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 }

@@ -93,6 +93,9 @@ vim.g.maplocalleader = " "
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
+-- allow 256 colors for for base16 color schemes
+vim.g.base16_colorspace = 256
+
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -100,9 +103,10 @@ vim.g.have_nerd_font = false
 
 -- Make line numbers default
 vim.opt.number = true
+
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = "a"
@@ -161,6 +165,8 @@ vim.opt.scrolloff = 10
 -- See `:help 'confirm'`
 vim.opt.confirm = true
 
+vim.o.shiftwidth = 4
+vim.o.tabstop = 4
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -736,6 +742,10 @@ require("lazy").setup({
                     end,
                 },
             })
+            require("lspconfig").gopls.setup({})
+            require("lspconfig").clangd.setup({})
+            require("lspconfig").pyright.setup({})
+            require("lspconfig").rust_analyzer.setup({})
         end,
     },
 
@@ -983,6 +993,16 @@ require("lazy").setup({
         --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
         --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     },
+    { -- Add indentation guides even on blank lines
+        "lukas-reineke/indent-blankline.nvim",
+        -- Enable `lukas-reineke/indent-blankline.nvim`
+        -- See `:help ibl`
+        main = "ibl",
+        opts = {
+            indent = { char = "⠅" }, --  ⠂⡇
+        },
+    },
+
 
     -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
     -- init.lua. If you want these files, they are in the repository, so you can just download them and
