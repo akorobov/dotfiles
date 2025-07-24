@@ -10,12 +10,14 @@
   "features": {
     "edit_prediction_provider": "zed"
   },
-  "assistant": {
+  "edit_predictions": {
+    "mode": "subtle"
+  },
+  "agent": {
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-7-sonnet-latest"
-    },
-    "version": "2"
+      "provider": "google",
+      "model": "gemini-2.5-pro"
+    }
   },
   "ui_font_size": 12,
   "buffer_font_family": "PragmataPro Mono Liga",
